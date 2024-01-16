@@ -8,85 +8,6 @@ import math  # If mathematical functions are required
 import random  # If random number generation is required
 # Additional imports if needed
 
-# Intermittent function definitions
-
-def intermittent2(nt,dt,mean_bal_sac,diffusion,rate21,rate12):
-    diffusion = np.sqrt(2*diffusion)
-    P1 = rate21/(rate12+rate21)
-    if np.random.random()<P1:
-        regime=1
-        waitt   = -math.log(1.0-np.random.uniform(0.0,1.0,None))/rate12
-    else:
-        regime=2
-        angle2 = np.random.randint(2)*math.pi
-        waitt   = -math.log(1.0-np.random.uniform(0.0,1.0,None))/rate21
-
-    dts = math.sqrt(dt)
-    x = np.zeros(nt)
-    y = np.zeros(nt)
-    time_since_last_jump = 0
-    for i in range(1,nt):
-        angle = random.random()*2*math.pi
-        time_since_last_jump += dt        
-        if regime == 1:
-            #diffu = diffusion*np.random.normal(0,1)*dts
-            dx = np.random.normal(0,diffusion)*dts
-            dy = np.random.normal(0,diffusion)*dts
-            x[i] = x[i-1] + dx
-            y[i] = y[i-1] + dy
-            if time_since_last_jump> waitt:
-                waitt   = -math.log(1.0-np.random.uniform(0.0,1.0,None))/rate21
-                regime = 2
-                angle2 = angle
-                time_since_last_jump =0
-        if regime == 2:
-            angle3 = angle2 
-            bal = mean_bal_sac*dt 
-            dx = bal*math.cos(angle3)
-            dy = bal*math.sin(angle3)
-            x[i] = x[i-1] + dx
-            y[i] = y[i-1] + dy
-
-            if time_since_last_jump> waitt:
-                waitt   = -math.log(1.0-np.random.uniform(0.0,1.0,None))/rate12
-                time_since_last_jump =0
-                regime = 1
-        
-    return(x,y)
-
-
-def levy_flight_2D_2(n_redirections,n_max,lalpha,tmin,measuring_dt):
-    if lalpha <= 1:
-        print("alpha should be larger than 1")
-        return("alpha should be larger than 1")
-    
-
-    t_redirection= tmin*(np.ones(n_redirections) - np.random.rand(n_redirections))**(1.0/(-lalpha+1))   
-    cum_t_redirection = np.cumsum(t_redirection)
-
-
-    angle = np.random.rand(len(t_redirection))*2*math.pi
-    x_increments = t_redirection*np.cos(angle)
-    y_increments = t_redirection*np.sin(angle)
-    l_x_list = np.cumsum(x_increments)
-    l_y_list = np.cumsum(y_increments)
-    
-
-    if n_max*measuring_dt < cum_t_redirection[-1]:
-
-        x_measured = np.interp(np.arange(0,n_max*measuring_dt,measuring_dt),np.cumsum(t_redirection),l_x_list)
-        y_measured = np.interp(np.arange(0,n_max*measuring_dt,measuring_dt),np.cumsum(t_redirection),l_y_list)
-        
-    else:
-        
-        n_max = int(cum_t_redirection[-1]/measuring_dt)
-        #print("me<zasuring time greater than simulated time. n_max becomes " + str(n_max))
-        x_measured = np.interp(np.arange(0,n_max*measuring_dt,measuring_dt),np.cumsum(t_redirection),l_x_list)
-        y_measured = np.interp(np.arange(0,n_max*measuring_dt,measuring_dt),np.cumsum(t_redirection),l_y_list)
-        #print("measuring time greater than simulated time.")
-    return x_measured,y_measured,t_redirection
-
-
 
 
 def HMM_first_guess(dS):
@@ -199,8 +120,83 @@ def HMM_first_guess_revise(dS):
 
 
 
+# Intermittent function definitions
+
+def intermittent2(nt,dt,mean_bal_sac,diffusion,rate21,rate12):
+    diffusion = np.sqrt(2*diffusion)
+    P1 = rate21/(rate12+rate21)
+    if np.random.random()<P1:
+        regime=1
+        waitt   = -math.log(1.0-np.random.uniform(0.0,1.0,None))/rate12
+    else:
+        regime=2
+        angle2 = np.random.randint(2)*math.pi
+        waitt   = -math.log(1.0-np.random.uniform(0.0,1.0,None))/rate21
+
+    dts = math.sqrt(dt)
+    x = np.zeros(nt)
+    y = np.zeros(nt)
+    time_since_last_jump = 0
+    for i in range(1,nt):
+        angle = random.random()*2*math.pi
+        time_since_last_jump += dt        
+        if regime == 1:
+            #diffu = diffusion*np.random.normal(0,1)*dts
+            dx = np.random.normal(0,diffusion)*dts
+            dy = np.random.normal(0,diffusion)*dts
+            x[i] = x[i-1] + dx
+            y[i] = y[i-1] + dy
+            if time_since_last_jump> waitt:
+                waitt   = -math.log(1.0-np.random.uniform(0.0,1.0,None))/rate21
+                regime = 2
+                angle2 = angle
+                time_since_last_jump =0
+        if regime == 2:
+            angle3 = angle2 
+            bal = mean_bal_sac*dt 
+            dx = bal*math.cos(angle3)
+            dy = bal*math.sin(angle3)
+            x[i] = x[i-1] + dx
+            y[i] = y[i-1] + dy
+
+            if time_since_last_jump> waitt:
+                waitt   = -math.log(1.0-np.random.uniform(0.0,1.0,None))/rate12
+                time_since_last_jump =0
+                regime = 1
+        
+    return(x,y)
 
 
+def levy_flight_2D_2(n_redirections,n_max,lalpha,tmin,measuring_dt):
+    if lalpha <= 1:
+        print("alpha should be larger than 1")
+        return("alpha should be larger than 1")
+    
+
+    t_redirection= tmin*(np.ones(n_redirections) - np.random.rand(n_redirections))**(1.0/(-lalpha+1))   
+    cum_t_redirection = np.cumsum(t_redirection)
+
+
+    angle = np.random.rand(len(t_redirection))*2*math.pi
+    x_increments = t_redirection*np.cos(angle)
+    y_increments = t_redirection*np.sin(angle)
+    l_x_list = np.cumsum(x_increments)
+    l_y_list = np.cumsum(y_increments)
+    
+
+    if n_max*measuring_dt < cum_t_redirection[-1]:
+
+        x_measured = np.interp(np.arange(0,n_max*measuring_dt,measuring_dt),np.cumsum(t_redirection),l_x_list)
+        y_measured = np.interp(np.arange(0,n_max*measuring_dt,measuring_dt),np.cumsum(t_redirection),l_y_list)
+        
+    else:
+        
+        n_max = int(cum_t_redirection[-1]/measuring_dt)
+        #print("me<zasuring time greater than simulated time. n_max becomes " + str(n_max))
+        x_measured = np.interp(np.arange(0,n_max*measuring_dt,measuring_dt),np.cumsum(t_redirection),l_x_list)
+        y_measured = np.interp(np.arange(0,n_max*measuring_dt,measuring_dt),np.cumsum(t_redirection),l_y_list)
+        #print("measuring time greater than simulated time.")
+    return x_measured,y_measured,t_redirection
 
 
 
