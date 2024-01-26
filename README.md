@@ -2,7 +2,7 @@
 
 
 ## Overview
-This project simulates and analyzes intermittent Levy flight behaviors in 2D. It incorporates custom functions for generating synthetic data, performing curve fitting, and analyzing data patterns. The script integrates data generation, statistical modeling, and visualization functionalities.
+This project simulates and analyzes intermittent processes and Levy flight behaviors in 2D. It incorporates custom functions for generating synthetic data, performing curve fitting, and analyzing data patterns. The script integrates data generation, statistical modeling, and visualization functionalities.
 
 ## Installation
 
@@ -13,12 +13,15 @@ This project simulates and analyzes intermittent Levy flight behaviors in 2D. It
 - Matplotlib
 - scikit-learn
 
+
 ### Installing Dependencies
 Install the required packages using the following command:
 ```bash
 pip install numpy scipy matplotlib scikit-learn
-
+```
 ### Setting Up the Project
+
+
 1. Clone the repository or download the source code.
 2. Navigate to the project directory.
 3. Create a new directory named `intermittentLevy` inside the project directory.
@@ -31,8 +34,7 @@ Follow these steps to use the script:
 1. Navigate to the directory containing the script.
 2. Run the script with Python:
    ```bash
-   python <script_name>.py
-
+   python main.py
 
 ### Operations performed by the script:
 . Load parameters and set up Kernel Density Estimation (KDE).
@@ -56,12 +58,36 @@ You can customize the simulation by modifying the parameters in the script, such
 - `N_iter`: Number of iterations.
 - `tau_list`: List of tau values for analysis.
 - `g_v0`, `g_D`, `g_lambda_B`, `g_lambda_D`: Parameters for the `intermittent2` function.
+- 
+# Code Functions Overview
 
-## Contributing
-Contributions to this project are welcome. Please follow the standard fork and pull request workflow.
+The functions are defined for calculating statistical moments and performing optimization. Below is an overview of the functions defined in the code:
+
+## moment_functions
+
+This function calculates various statistical moments based on the provided parameters.
+
+## mom4_serg_log
+
+`mom4_serg_log` is responsible for computing the 4th and 2nd moments in logarithmic space.
+
+## to_optimize_mom4_serg_log
+
+`to_optimize_mom4_serg_log` is used for the optimization of the 4th moment in logarithmic space.
+
+## optimize_mom4_serg_log
+
+`optimize_mom4_serg_log` is the function responsible for optimizing the 4th moment.
+
+## numerical_stability
+
+`numerical_stability` ensures numerical stability by adding a small epsilon value.
+These functions are defined in the code and perform specific tasks related to moment calculations and optimization.
+Feel free to explore the code further to understand the details of each function and how they are utilized.
+
 
 ## License
-[Specify License Here]
+MIT License Copyright (c)
 
-## Acknowledgments
-- [List any collaborators, third-party libraries, or resources used]
+## Authors
+- [List all]
