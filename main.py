@@ -1,91 +1,116 @@
-import sys
 import os
+import sys
 import numpy as np
+import scipy.optimize
 import matplotlib.pyplot as plt
 from sklearn.neighbors import KernelDensity
+from scipy.optimize import curve_fit, dual_annealing
+from scipy.stats import linregress
+# Determine the directory where this script is located
+script_dir = os.path.dirname(os.path.abspath(__file__))
 
-# Append the path to 'intermittentLevy' directory
-sys.path.append(os.path.join(os.path.dirname(__file__), 'intermittentLevy'))
+# Append the path to 'intermittentLevy' directory relative to the script directory
+intermittentLevy_path = os.path.join(script_dir, 'intermittentLevy')
+sys.path.append(intermittentLevy_path)
 
-# Import functions from 'momentum.py'
-from momentum import intermittent2, levy_flight_2D_2, form_groups, load_parameters, setup_kde, perform_iterations
+# Now import your custom functions
+from functions import (intermittent2,levy_flight_2D_2, load_parameters, setup_kde,
+                       perform_iterations, mom4_serg_log,
+                       to_optimize_mom4_serg_log, to_optimize_mom22_4_diff_serg_log,
+                       mom22_4_diff_serg_log)
 
-# Generate an intermittent trajectory
-x, y = intermittent2(nt=1000, dt=1, mean_bal_sac=1, diffusion=1, rate21=0.5, rate12=0.5)
-
-# Plot intermittent trajectory
-plt.plot(x, y)
-plt.xlabel('X Position')
-plt.ylabel('Y Position')
-plt.title('Intermittent Random Walk')
-plt.show()
-
-# Generate Lévy flight trajectory
-x_measured, y_measured, _ = levy_flight_2D_2(n_redirections=100, n_max=1000, lalpha=1.5, tmin=1, measuring_dt=1)
-
-# Plot Lévy flight trajectory
-plt.plot(x_measured, y_measured)
-plt.xlabel('X Position')
-plt.ylabel('Y Position')
-plt.title('Lévy Walk')
-plt.show()
-
-# Define a random vector
-vector = np.random.rand(100)
-
-# Define 'threshold_array' with appropriate thresholds
-threshold_array = np.linspace(0, 1, 1000)
-
-# Define the x-axis format
-x_axis_format = "%.2f"
-
-# Process the data and obtain detection values and minimum thresholds
-detection, detectionfisher, min_k, min_fisher, _, _, _ = form_groups(vector, threshold_array, x_axis_format)
-
-# Calculate log-k values
-log_k = np.log(detection)
-
-# Plot for 'detection' with threshold lines
-plt.figure(figsize=(8, 4))
-plt.plot(threshold_array, detection, label='k')
-plt.plot(threshold_array, detectionfisher, label='log-fisher')
-plt.xlabel("Threshold")
-plt.title("Detection (k) and log-fisher")
-plt.xticks(rotation=45)
-plt.ylabel("Values")
-
-# Add vertical lines for minimum thresholds
-if min_k is not None:
-    plt.axvline(x=min_k, color='r', linestyle='--', label='Min k threshold')
-if min_fisher is not None:
-    plt.axvline(x=min_fisher, color='g', linestyle='--', label='Min Fisher threshold')
-
-plt.legend()
-plt.tight_layout()
-plt.show()
-
-# Load parameters, set up KDE, and define other simulation parameters
+# Load parameters and set up KDE
 normed_loc_params, mean_params, std_params = load_parameters('intermittent_est_params.txt')
 kde = setup_kde(normed_loc_params)
 
-N = 10000  # Number of points
-N_iter = 200  # Number of iterations
+# Simulation parameters
+N = 10000
+N_iter = 2000
 integration_factor = 1
 g_tau = 1
-tau_list = np.arange(1, 30)
+tau_list = np.arange(1, 60)  # Adjust to ensure compatibility with data generation
 
 # Perform iterations
 og_params, lev_params_int, adj_r_square_int_lev, adj_r_square_int_int, est_params, est_params2 = perform_iterations(
     N_iter, N, integration_factor, g_tau, kde, std_params, mean_params, tau_list
 )
 
-# Plotting the results of the simulations
-plt.figure(figsize=(10, 6))
-plt.plot(adj_r_square_int_lev, label='Adjusted R-square Levy', marker='o')
-plt.plot(adj_r_square_int_int, label='Adjusted R-square Int', marker='x')
-plt.xlabel('Iteration', fontsize=14)
-plt.ylabel('Adjusted R-square', fontsize=14)
-plt.title('Adjusted R-square over Iterations', fontsize=16)
-plt.legend()
-plt.grid(True)
+
+# Function to write data to a text file
+def write_to_file(filename, content):
+    path = f"{filename}.txt"
+    with open(path, "w") as file:
+        for item in np.atleast_1d(content):
+            file.write(f"{item}\n")
+    return path
+
+
+# Write summary results to files
+file_paths = [
+    write_to_file("summary_og_params", og_params),
+    write_to_file("summary_levy_params", lev_params_int),
+    write_to_file("summary_adj_r_square_levy", adj_r_square_int_lev),
+    write_to_file("summary_adj_r_square_int", adj_r_square_int_int),
+    write_to_file("summary_est_params", est_params),
+    write_to_file("summary_est_params2", est_params2)
+]
+
+# Print the paths of the written files
+print("File paths of the written summaries:", file_paths)
+
+
+# Define a safe logarithm function
+def safe_log(x, min_val=1e-10, max_val=1e30):
+    return np.log(np.clip(x, min_val, max_val))
+
+# Generate synthetic data for dx4_log based on tau_list
+# Using the intermittent2 function and the procedure from your original script
+g_v0, g_D, g_lambda_B, g_lambda_D = 5.0, 1.0, 0.05, 0.005
+factor1, factor2, factor3, factor4 = 1, 1, 1, 1
+x_loc, y_loc = intermittent2(N * integration_factor, g_tau / integration_factor, g_v0 * factor1, g_D * factor2,
+                             g_lambda_B * factor3, g_lambda_D * factor4)
+
+dx_list, dx2, dx4 = [], [], []
+for i in tau_list:
+    dx = np.diff(x_loc[::i * integration_factor])
+    dx_list.append(dx)
+    dx2.append(np.mean(dx**2))
+    dx4.append(np.mean(dx**4))
+
+dx2_log = np.log(dx2)
+dx4_log = np.log(dx4)
+
+# Calculate the difference
+difference = np.array(dx4_log) - 2 * np.array(dx2_log)
+
+# Define the model function for curve_fit
+def model_func(tau, v0, D, lambdaB, lambdaD):
+    return mom4_serg_log(tau, v0, D, lambdaB, lambdaD)
+
+# Perform the curve fitting
+initial_guess = [g_v0, g_D, g_lambda_B, g_lambda_D]
+popt, pcov = curve_fit(model_func, tau_list, dx4_log, p0=initial_guess)
+
+# Plot the synthetic data and the fitted model
+fig, axs = plt.subplots(2, 1, figsize=(10, 6))
+
+# First subplot
+axs[0].plot(np.log10(tau_list), dx4_log, 'ks', alpha=1, label='synthetic data')
+axs[0].plot(np.log10(tau_list), model_func(np.array(tau_list), *popt), label='Fitted model', c='red', linewidth=2)
+axs[0].set_xlabel(r'$\log_{10}(\tau)$')
+axs[0].set_ylabel(r'$\log_{10}(dx^4)$')
+axs[0].legend()
+axs[0].set_title('Synthetic Data and Fitted Model')
+
+# Second subplot
+axs[1].plot(np.log10(tau_list), difference, 'ks', alpha=1, label='synthetic data')
+axs[1].plot(np.log10(tau_list),
+            mom22_4_diff_serg_log(np.array(tau_list), g_v0 * factor1, g_D * factor2, g_lambda_B * factor3,
+                                  g_lambda_D * factor4), label='Model Fit', c='red')
+axs[1].set_xlabel(r'$\log_{10}(\tau)$')
+axs[1].set_ylabel(r'$\log_{10} \|dx^4\| - 2\log_{10} \|dx^2\|$')
+axs[1].legend()
+axs[1].set_title('Model Fit Comparison')
+
+plt.tight_layout()
 plt.show()
