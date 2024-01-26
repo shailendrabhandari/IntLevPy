@@ -59,27 +59,27 @@ You can customize the simulation by modifying the parameters in the script, such
 - `tau_list`: List of tau values for analysis.
 - `g_v0`, `g_D`, `g_lambda_B`, `g_lambda_D`: Parameters for the `intermittent2` function.
 - 
-# Code Functions Overview
+## Code Functions Overview
 
 The functions are defined for calculating statistical moments and performing optimization. Below is an overview of the functions defined in the code:
 
-## moment_functions
+### moment_functions
 
 This function calculates various statistical moments based on the provided parameters.
 
-## mom4_serg_log
+### mom4_serg_log
 
 `mom4_serg_log` is responsible for computing the 4th and 2nd moments in logarithmic space.
 
-## to_optimize_mom4_serg_log
+### to_optimize_mom4_serg_log
 
 `to_optimize_mom4_serg_log` is used for the optimization of the 4th moment in logarithmic space.
 
-## optimize_mom4_serg_log
+### optimize_mom4_serg_log
 
 `optimize_mom4_serg_log` is the function responsible for optimizing the 4th moment.
 
-## numerical_stability
+### numerical_stability
 
 `numerical_stability` ensures numerical stability by adding a small epsilon value.
 These functions are defined in the code and perform specific tasks related to moment calculations and optimization.
