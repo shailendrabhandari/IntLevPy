@@ -15,9 +15,9 @@ sys.path.append(intermittentLevy_path)
 
 # Now import your custom functions
 from functions import (intermittent2,levy_flight_2D_2, load_parameters, setup_kde,
-                       perform_iterations, mom4_log,
-                       to_optimize_mom4_log, to_optimize_mom22_4_diff_log,
-                       mom22_4_diff_log)
+                       perform_iterations, mom4_serg_log,
+                       to_optimize_mom4_serg_log, to_optimize_mom22_4_diff_serg_log,
+                       mom22_4_diff_serg_log)
 
 # Load parameters and set up KDE
 normed_loc_params, mean_params, std_params = load_parameters('intermittent_est_params.txt')
@@ -85,7 +85,7 @@ difference = np.array(dx4_log) - 2 * np.array(dx2_log)
 
 # Define the model function for curve_fit
 def model_func(tau, v0, D, lambdaB, lambdaD):
-    return mom4_log(tau, v0, D, lambdaB, lambdaD)
+    return mom4_serg_log(tau, v0, D, lambdaB, lambdaD)
 
 # Perform the curve fitting
 initial_guess = [g_v0, g_D, g_lambda_B, g_lambda_D]
@@ -105,7 +105,7 @@ axs[0].set_title('Synthetic Data and Fitted Model')
 # Second subplot
 axs[1].plot(np.log10(tau_list), difference, 'ks', alpha=1, label='synthetic data')
 axs[1].plot(np.log10(tau_list),
-            mom22_4_diff_log(np.array(tau_list), g_v0 * factor1, g_D * factor2, g_lambda_B * factor3,
+            mom22_4_diff_serg_log(np.array(tau_list), g_v0 * factor1, g_D * factor2, g_lambda_B * factor3,
                                   g_lambda_D * factor4), label='Model Fit', c='red')
 axs[1].set_xlabel(r'$\log_{10}(\tau)$')
 axs[1].set_ylabel(r'$\log_{10} \|dx^4\| - 2\log_{10} \|dx^2\|$')
@@ -114,6 +114,3 @@ axs[1].set_title('Model Fit Comparison')
 
 plt.tight_layout()
 plt.show()
-
-
-
