@@ -91,35 +91,32 @@ For a detailed understanding, please refer to the comments and documentation wit
 
 
 ## Moment Calculations
-### `moment4(t, v0, D, lambdaB, lambdaD)`
+#### `moment4(t, v0, D, lambdaB, lambdaD)`
 - Calculates the logarithm of the fourth moment of a stochastic process. Useful in analyzing the dynamics of processes over time with given initial velocity and diffusion coefficients.
 
-### `mom4_log(t, v0, D, lambdaB, lambdaD)`
+#### `mom4_log(t, v0, D, lambdaB, lambdaD)`
 - imilar to moment4, it calculates the logarithm of the fourth moment, specifically designed for processes with certain characteristics.
 
-### `mom2\_model(tau, param1, param2)`
+#### `mom2_model(tau, param1, param2)`
 - Defines the model for the second moment, offering a way to represent stochastic processes based on input values and parameters.
 
 
-### `mom2_log(l_tau, v, D, l_lambdaB, l_lambdaD)`
+#### `mom2_log(l_tau, v, D, l_lambdaB, l_lambdaD)`
 - Defines a logarithm of a second moment model.
 
-## Optimization Functions
 
-### `to_optimize_mom4_serg(params)`
+#### `to_optimize_mom4_serg(params)`
 -  Optimizes the parameters for the `mom4_serg_log` function based on input data.
 
-
-### `to_optimize_mom22_4_diff(params)`
+#### `to_optimize_mom22_4_diff(params)`
 - Optimizes the parameters for the `mom22_4_diff_serg_log` function based on input data.
 
-
-### `mom22_4_diff_log(l_tau, v, D, l_lambdaB, l_lambdaD)`
+#### `mom22_4_diff_log(l_tau, v, D, l_lambdaB, l_lambdaD)`
 - Computes a ration of fourth and the square of second moment in logarithmic form.
-### `powerl_fit(l_x, l_c, l_a)`:
+#### `powerl_fit(l_x, l_c, l_a)`:
 Calculates the value of a power-law function for given parameters, useful in modeling phenomena that follow a power-law distribution.
 
-### `r_square(l_emp_points, l_emp_fit)`:
+#### `r_square(l_emp_points, l_emp_fit)`:
 Computes the R-squared value, indicating the fit quality of a regression model to empirical data.
 
 ## License
@@ -139,29 +136,24 @@ furnished to do so, subject to the following conditions:
 ## Authors
 
 **Pedro Lencastre**
-- *Affiliations:* 
-  - Department of Computer Science, OsloMet -- Oslo Metropolitan University, Oslo, Norway
-  - AI Lab -- OsloMet Artificial Intelligence Lab, Oslo, Norway
-  - NordSTAR -- Nordic Center for Sustainable and Trustworthy AI Research, Oslo, Norway
+- *Affiliations:* 1, 2, 3
 
 **Shailendra Bhandari**
-- *Affiliations:* 
-  - Department of Computer Science, OsloMet -- Oslo Metropolitan University, Oslo, Norway
-  - AI Lab -- OsloMet Artificial Intelligence Lab, Oslo, Norway
-  - NordSTAR -- Nordic Center for Sustainable and Trustworthy AI Research, Oslo, Norway
+- *Affiliations:* 1, 2, 3
 
 **Sergiy Denysov**
-- *Affiliations:* 
-  - Department of Computer Science, OsloMet -- Oslo Metropolitan University, Oslo, Norway
-  - NordSTAR -- Nordic Center for Sustainable and Trustworthy AI Research, Oslo, Norway
+- *Affiliations:* 1, 3
 
 **Yuri Bystrik**
-- *Affiliation:* Institute of Applied Physics, National Academy of Sciences of Ukraine, Petropavlivska Street 58, Sumy, 40000, Ukraine
+- *Affiliation:* 4
 
 **Pedro G. Lind**
-- *Affiliations:* 
-  - Department of Computer Science, OsloMet -- Oslo Metropolitan University, Oslo, Norway
-  - AI Lab -- OsloMet Artificial Intelligence Lab, Oslo, Norway
-  - NordSTAR -- Nordic Center for Sustainable and Trustworthy AI Research, Oslo, Norway
-  - Simula Research Laboratory, Numerical Analysis and Scientific Computing, Oslo, Norway
+- *Affiliations:* 1, 2, 3, 5
+
+### Affiliations
+1. Department of Computer Science, OsloMet -- Oslo Metropolitan University, Oslo, Norway
+2. AI Lab -- OsloMet Artificial Intelligence Lab, Oslo, Norway
+3. NordSTAR -- Nordic Center for Sustainable and Trustworthy AI Research, Oslo, Norway
+4. Institute of Applied Physics, National Academy of Sciences of Ukraine, Petropavlivska Street 58, Sumy, 40000, Ukraine
+5. Simula Research Laboratory, Numerical Analysis and Scientific Computing, Oslo, Norway
 
