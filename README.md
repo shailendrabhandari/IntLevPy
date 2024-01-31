@@ -1,17 +1,10 @@
 # IntLevy Process
 
 ## Overview
-The IntLevy Process project is dedicated to the study and simulation of two significant phenomena in stochastic processes: intermittent processes and Levy flights. Intermittent processes are characterized by alternating periods of intense activity and relative calm, resembling many real-world systems such as financial markets or geological events. Levy flights, on the other hand, represent a random walk where the step lengths have a heavy-tailed probability distribution, featuring occasional long jumps.
-
-Our project offers a comprehensive toolkit for simulating these complex behaviors in a 2D space. The provided functions enable users to generate synthetic datasets that mimic the intricate patterns observed in intermittent and Levy flight processes. This capability is crucial for researchers and practitioners who need to understand and predict the behavior of systems exhibiting such stochastic dynamics.
-
-Additionally, the project supports the analysis of real data, allowing users to apply our models to their datasets. This integration of simulation and real-world application makes our toolkit not only a valuable educational resource but also a practical tool for data analysis in fields like physics, ecology, finance, and more.
-
-The script is designed with flexibility in mind, offering various customization options to fit different research needs and data characteristics. Whether it's exploring theoretical aspects of stochastic processes or analyzing real-world data, our project provides the necessary functions and a user-friendly approach to studying intermittent and Levy flight behaviors.
+The IntLevy Process project is a specialized Python toolkit for simulating and analyzing intermittent processes and Levy flights. It excels in creating synthetic datasets that replicate the alternating intense and calm periods of intermittent processes, and the long-jump characteristic of Levy flights. This tool is essential for understanding stochastic dynamics in various fields, including physics, ecology, and finance. It's user-friendly and adaptable, offering both theoretical exploration and practical analysis capabilities for real-world data.
 
 
 ## Installation
-
 ### Prerequisites
 - Python 3.x
 - NumPy
@@ -32,7 +25,7 @@ pip install numpy scipy matplotlib scikit-learn
 2. Navigate to the project directory.
 3. Create a new directory named `intermittentLevy` inside the project directory.
 4. Place your custom scripts or modules in the `intermittentLevy` directory.
-5. Ensure the `functions.py` script in the `intermittentLevy` directory contains all the necessary custom functions. The script should define functions like `intermittent2`, `levy_flight_2D_2`, `load_parameters`, `setup_kde`, `perform_iterations`, `mom4_serg_log`, `to_optimize_mom4_serg_log`, `to_optimize_mom22_4_diff_serg_log`, and `mom22_4_diff_serg_log`.
+5. 5. Ensure the `functions.py` script in the `intermittentLevy` directory contains all the necessary custom functions. The script should define functions such as `intermittent2`, `levy_flight_2D_2`, `load_parameters`, `setup_kde`, `perform_iterations`, `mom4_log`, `to_optimize_mom4_log`, `to_optimize_mom22_4_diff_log`, `mom22_4_diff_log`, `moment4`, `to_optimize_mom4`, `mom22_4_diff`, `to_optimize_mom22_4_diff`, `mom2_model`, `mom4_model`, `form_groups`, `adjusted_r_square`, `powerl_fit`, and `perform_estimation`.
 6. The script expects a file named `intermittent_est_params.txt` for loading parameters. Ensure this file is placed in a location accessible by the script.
 
 ## Usage
@@ -58,7 +51,20 @@ Follow these steps to use the script:
   - `summary_est_params.txt`
   - `summary_est_params2.txt`
 
+## Example Notebook
 
+An example notebook is provided to demonstrate the usage of the IntLevy Process toolkit. This notebook guides you through the steps to distinguish between intermittent processes and Levy flights, showcasing how to simulate these processes, analyze their characteristics, and differentiate between them.
+
+Access the notebook here: [Example Notebook](https://github.com/shailendrabhandari/IntLevy-Processes/blob/main/example.ipynb)
+
+### Quick Start
+
+1. **Access the Notebook**: Use the link to view and download the notebook from GitHub.
+2. **Run the Notebook**: Open it in Jupyter Notebook or JupyterLab on your local setup, or use an online platform like Google Colab.
+3. **Follow the Steps**: The notebook includes step-by-step instructions and explanations, guiding you through simulations and analyses.
+4. **Interactive Learning**: Experiment with the code, alter parameters, and observe the differences between intermittent and Levy flight processes.
+
+For a detailed understanding, please refer to the comments and documentation within the notebook.
 
 ## Stochastic Processes Simulation
 
@@ -82,60 +88,80 @@ Follow these steps to use the script:
   - `measuring_dt`: Measurement time step (float).
 - **Returns**: x and y coordinates of the Levy flight, time of redirections (arrays).
 
-## Data Analysis
 
-### `frequency_matrix_2D(d__ss, threshold, normalized)`
-- **Description**: Creates a frequency matrix from a 2D dataset.
-- **Parameters**:
-  - `d__ss`: Input dataset (array).
-  - `threshold`: Threshold for frequency calculation (float).
-  - `normalized`: Whether to normalize the matrix (boolean).
-- **Returns**: Frequency matrix (2D array).
 
 ## Moment Calculations
+### `moment4(t, v0, D, lambdaB, lambdaD)`
+- Calculates the logarithm of the fourth moment of a stochastic process. Useful in analyzing the dynamics of processes over time with given initial velocity and diffusion coefficients.
 
-### `mom4_serg_log(t, v0, D, lambdaB, lambdaD)`
-- **Description**: Calculates the logarithm of the fourth moment of a stochastic process.
-- **Parameters**:
-  - `t`: Time parameter (float).
-  - `v0`: Initial velocity (float).
-  - `D`: Diffusion coefficient (float).
-  - `lambdaB`: Rate parameter B (float).
-  - `lambdaD`: Rate parameter D (float).
-- **Returns**: Logarithm of the fourth moment (float).
+### `mom4_log(t, v0, D, lambdaB, lambdaD)`
+- imilar to moment4, it calculates the logarithm of the fourth moment, specifically designed for processes with certain characteristics.
 
-### `mom2_serg_log(l_tau, v, D, l_lambdaB, l_lambdaD)`
-- **Description**: Calculates the logarithm of the second moment of a stochastic process.
-- **Parameters**:
-  - `l_tau`: Time parameter (float).
-  - `v`: Velocity parameter (float).
-  - `D`: Diffusion coefficient (float).
-  - `l_lambdaB`: Rate parameter B (float).
-  - `l_lambdaD`: Rate parameter D (float).
-- **Returns**: Logarithm of the second moment (float).
+### `mom2\_model(tau, param1, param2)`
+- Defines the model for the second moment, offering a way to represent stochastic processes based on input values and parameters.
+
+
+### `mom2_log(l_tau, v, D, l_lambdaB, l_lambdaD)`
+- Defines a logarithm of a second moment model.
 
 ## Optimization Functions
 
-### `to_optimize_mom4_serg_log(params)`
-- **Description**: Optimizes the parameters for the `mom4_serg_log` function based on input data.
-- **Parameters**:
-  - `params`: A tuple containing the parameters to be optimized.
-- **Returns**: Sum of absolute differences between empirical data and model (float).
+### `to_optimize_mom4_serg(params)`
+-  Optimizes the parameters for the `mom4_serg_log` function based on input data.
 
-### `to_optimize_mom22_4_diff_serg_log(params)`
-- **Description**: Optimizes the parameters for the `mom22_4_diff_serg_log` function based on input data.
-- **Parameters**:
-  - `params`: A tuple containing the parameters to be optimized.
-- **Returns**: Sum of absolute differences between empirical data and model (float).
 
-### `mom22_4_diff_serg_log(l_tau, v, D, l_lambdaB, l_lambdaD)`
-- **Description**: Calculates a modified version of the second moment in logarithmic form.
-- **Parameters**: Same as in `mom2_serg_log`.
-- **Returns**: Modified logarithmic second moment (float).
+### `to_optimize_mom22_4_diff(params)`
+- Optimizes the parameters for the `mom22_4_diff_serg_log` function based on input data.
 
+
+### `mom22_4_diff_log(l_tau, v, D, l_lambdaB, l_lambdaD)`
+- Computes a ration of fourth and the square of second moment in logarithmic form.
+### `powerl_fit(l_x, l_c, l_a)`:
+Calculates the value of a power-law function for given parameters, useful in modeling phenomena that follow a power-law distribution.
+
+### `r_square(l_emp_points, l_emp_fit)`:
+Computes the R-squared value, indicating the fit quality of a regression model to empirical data.
 
 ## License
-MIT License Copyright (c)
+This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/shailendrabhandari/IntLevy-Processes/blob/main/LICENSE) file for details.
+
+### MIT License Copyright (c)
+
+Copyright (c) 2024 authors
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
 ## Authors
-- [List all]
+
+**Pedro Lencastre**
+- *Affiliations:* 
+  - Department of Computer Science, OsloMet -- Oslo Metropolitan University, Oslo, Norway
+  - AI Lab -- OsloMet Artificial Intelligence Lab, Oslo, Norway
+  - NordSTAR -- Nordic Center for Sustainable and Trustworthy AI Research, Oslo, Norway
+
+**Shailendra Bhandari**
+- *Affiliations:* 
+  - Department of Computer Science, OsloMet -- Oslo Metropolitan University, Oslo, Norway
+  - AI Lab -- OsloMet Artificial Intelligence Lab, Oslo, Norway
+  - NordSTAR -- Nordic Center for Sustainable and Trustworthy AI Research, Oslo, Norway
+
+**Sergiy Denysov**
+- *Affiliations:* 
+  - Department of Computer Science, OsloMet -- Oslo Metropolitan University, Oslo, Norway
+  - NordSTAR -- Nordic Center for Sustainable and Trustworthy AI Research, Oslo, Norway
+
+**Yuri Bystrik**
+- *Affiliation:* Institute of Applied Physics, National Academy of Sciences of Ukraine, Petropavlivska Street 58, Sumy, 40000, Ukraine
+
+**Pedro G. Lind**
+- *Affiliations:* 
+  - Department of Computer Science, OsloMet -- Oslo Metropolitan University, Oslo, Norway
+  - AI Lab -- OsloMet Artificial Intelligence Lab, Oslo, Norway
+  - NordSTAR -- Nordic Center for Sustainable and Trustworthy AI Research, Oslo, Norway
+  - Simula Research Laboratory, Numerical Analysis and Scientific Computing, Oslo, Norway
+
