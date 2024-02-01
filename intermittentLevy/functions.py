@@ -17,6 +17,26 @@ import scipy.optimize
 # Configuration for warning messages
 warnings.filterwarnings("error")
 
+def mom2(l_tau,v,D, l_lambdaB, l_lambdaD):
+    l_beta = l_lambdaB + l_lambdaD
+    l_alpha = l_lambdaB/(l_beta)    
+    C1 = 2*((v/l_beta)**2) * (l_alpha - 1)/(l_alpha**2)
+    C2 = 2*((1-l_alpha)/l_alpha) * ((v**2)/l_beta) + 4*D*l_alpha
+    
+    expr2 = 0.5*( C1*(1-np.exp(-l_alpha*l_beta*l_tau)) + C2*l_tau )
+    return(expr2)
+    
+def mom2_log(l_tau,v,D, l_lambdaB, l_lambdaD):
+    l_beta = l_lambdaB + l_lambdaD
+    l_alpha = l_lambdaB/(l_beta)    
+    C1 = 2*((v/l_beta)**2) * (l_alpha - 1)/(l_alpha**2)
+    C2 = 2*((1-l_alpha)/l_alpha) * ((v**2)/l_beta) + 4*D*l_alpha
+    
+    expr2 = 0.5*( C1*(1-np.exp(-l_alpha*l_beta*l_tau)) + C2*l_tau )
+    return(np.log(expr2))
+
+
+
 def moment4(t, v0, D, lambdaB, lambdaD):
     """
         Calculate the logarithm of the fourth moment of a stochastic process.
