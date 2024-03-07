@@ -133,27 +133,4 @@ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 copies of the Software, and to permit persons to whom the Software is
 furnished to do so, subject to the following conditions:
 
-## Authors
-
-**Pedro Lencastre**
-- *Affiliations:* 1, 2, 3
-
-**Shailendra Bhandari**
-- *Affiliations:* 1, 2, 3
-
-**Sergiy Denysov**
-- *Affiliations:* 1, 3
-
-**Yuri Bystrik**
-- *Affiliation:* 4
-
-**Pedro G. Lind**
-- *Affiliations:* 1, 2, 3, 5
-
-### Affiliations
-1. Department of Computer Science, OsloMet -- Oslo Metropolitan University, Oslo, Norway
-2. AI Lab -- OsloMet Artificial Intelligence Lab, Oslo, Norway
-3. NordSTAR -- Nordic Center for Sustainable and Trustworthy AI Research, Oslo, Norway
-4. Institute of Applied Physics, National Academy of Sciences of Ukraine, Petropavlivska Street 58, Sumy, 40000, Ukraine
-5. Simula Research Laboratory, Numerical Analysis and Scientific Computing, Oslo, Norway
-
+%## Authors
