@@ -124,8 +124,7 @@ This project is licensed under the MIT License - see the [LICENSE.md](https://gi
 
 ### MIT License Copyright (c)
 
-Copyright (c) 2024 authors
-
+Copyright (c) 2024 authors 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
 in the Software without restriction, including without limitation the rights
@@ -137,9 +136,8 @@ furnished to do so, subject to the conditions.
 furnished to do so, subject to the following conditions:
 
 ## Authors
+
 **Pedro Lencastre**
 **Shailendra Bhandari**
 
 
-
->>>>>>> 4e89dd0 (with updates)
