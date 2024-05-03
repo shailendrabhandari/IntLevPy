@@ -26,11 +26,11 @@ def mom2(l_tau,v,D, l_lambdaB, l_lambdaD):
     C1 = 2*((v/l_beta)**2) * (l_alpha - 1)/(l_alpha**2)
     C2 = 2*((1-l_alpha)/l_alpha) * ((v**2)/l_beta) + 4*D*l_alpha
     
-    expr2 = 0.5*( C1*(1-np.exp(-l_alpha*l_beta*l_tau)) + C2*l_tau )
+    expr2 = ( C1*(1-np.exp(-l_alpha*l_beta*l_tau)) + C2*l_tau )
     return(expr2)
 ###################################################################################    
 ##log10
-def mom2_log(l_tau,v,D, l_lambdaB, l_lambdaD):
+'''def mom2_log(l_tau,v,D, l_lambdaB, l_lambdaD):
     l_beta = l_lambdaB + l_lambdaD
     l_alpha = l_lambdaB/(l_beta)    
     C1_2 = 2*((v/l_beta)**2) * (l_alpha - 1)/(l_alpha**2)
@@ -38,8 +38,27 @@ def mom2_log(l_tau,v,D, l_lambdaB, l_lambdaD):
     
     expr2  = 2*np.log10( (C1_2*(1-np.exp(-l_alpha*l_beta*l_tau)) + C2_2*l_tau )/2)
 
-    return(expr2)
+    return(expr2)'''
     
+    
+##############################################################################################
+#corrected second moemnts log version
+##############################################################################################
+def mom2_log(l_tau, v, D, l_lambdaB, l_lambdaD):
+    l_beta = l_lambdaB + l_lambdaD
+    l_alpha = l_lambdaB / l_beta    
+    C1 = 2 * ((v / l_beta)**2) * (l_alpha - 1) / (l_alpha**2)
+    C2 = 2 * ((1 - l_alpha) / l_alpha) * ((v**2) / l_beta) + 4 * D * l_alpha
+    
+    # Calculate the second moment
+    moment_expr =  (C1 * (1 - np.exp(-l_alpha * l_beta * l_tau)) + C2 * l_tau)
+    
+    # Compute and return the log10 of the second moment
+    log_expr = np.log10(moment_expr)
+    return log_expr
+    
+##############################################################################################
+##############################################################################################
 # The fourth moments and its log
 ###################################################################################
 ###################################################################################
@@ -218,28 +237,6 @@ def levy_flight_2D_2(n_redirections,n_max,lalpha,tmin,measuring_dt):
 ###################################################################################
 ###################################################################################
 
-def form_groups(vector, threshold_array, x_axis_format):
-    detectionfisher = []
-    detection = []
-    min_k = None
-    min_fisher = None
-
-    if len(threshold_array) > 0:  # Check if the array is not empty
-        for i in threshold_array:
-            matrix = frequency_matrix_2D(vector, i, False)
-            fisher_result = scipy.stats.fisher_exact(matrix)
-            detectionfisher.append(np.log(fisher_result[1]))
-            p = matrix.sum(axis=1)[0] / matrix.sum()
-            detection.append(1 if p in [1, 0] else (matrix[1][0]) / (matrix.sum() * p * (1 - p)))
-
-        minim = min(vector)
-        diff = max(vector) - minim
-
-        min_k = np.argmin(detection) * diff / len(threshold_array) + minim
-        min_fisher = np.argmin(detectionfisher) * diff / len(threshold_array) + minim
-
-    return detection, detectionfisher, min_k, min_fisher, threshold_array, minim, diff
-###################################################################################    
 def r_square(l_emp_points, l_emp_fit):
     """
     Calculate the coefficient of determination, R-squared, which is a statistical measure of how well
@@ -280,153 +277,6 @@ def adjusted_r_square(l_emp_points, l_emp_fit, degrees_freedom):
 def powerl_fit(l_tau,l_k,l_a):
     return(l_k*np.power(2,l_tau*l_a))
     
-###################################################################################
-###################################################################################
-    
-def load_parameters(file_name):
-    loc_params = np.swapaxes(np.loadtxt(file_name), 0, 1)
-    mean_params = np.mean(np.log(loc_params), axis=1)
-    std_params = np.std(np.log(loc_params), axis=1)
-    return (np.swapaxes(np.log(loc_params), 0, 1) - mean_params) / std_params, mean_params, std_params
-
-def mom2_model(tau, param1, param2):
-    """
-    Define the model for the second moment.
-
-    Parameters:
-    tau (float or array): The input value(s) for the model.
-    param1 (float): The first parameter for the model.
-    param2 (float): The second parameter for the model.
-
-    Returns:
-    float or array: The result of the model for the given input value(s).
-    """
-    return param1 * tau**param2
-
-
-def mom4_model(tau, param1, param2):
-    return param1 * tau**param2
-    
-
-def setup_kde(normed_loc_params, bandwidth=0.2):
-    return KernelDensity(kernel='gaussian', bandwidth=bandwidth).fit(normed_loc_params)
-###################################################################################
-###################################################################################
-def to_optimize_mom4(params):
-    try:
-        model_result = momment4(tau_list, *params)
-        return np.sum(np.abs(dx4 - safe_log(model_result)))
-    except Exception as e:
-        return 1e10       
-      
-def to_optimize_mom4_log(params):
-    try:
-        model_result = mom4_serg_log(tau_list, *params)
-        return np.sum(np.abs(dx4_log - safe_log(model_result)))
-    except Exception as e:
-        # print("Error encountered:", e)
-        return 1e10
-
-
-def to_optimize_mom22_4_diff_log(params):
-    try:
-        model_result = mom22_4_diff_serg_log(tau_list, *params)
-        return np.sum(np.abs(difference - safe_log(model_result)))
-    except Exception as e:
-        # print("Error encountered:", e)
-        return 1e10
-
-###################################################################################
-###################################################################################
-
-def perform_iterations(N_iter, N, integration_factor, g_tau, kde, std_params, mean_params, tau_list):
-    og_params, lev_params_int, adj_r_square_int_lev, adj_r_square_int_int = [], [], [], []
-    est_params, est_params2 = [], []
-
-    for itera in range(N_iter):
-        new_data = kde.sample()
-        [[g_v0, g_D, g_lambda_B, g_lambda_D]] = np.exp(new_data * std_params + mean_params)
-        og_params.append([g_v0, g_D, g_lambda_B, g_lambda_D])
-
-        x_loc, y_loc = intermittent2(N, g_tau, g_v0, g_D, g_lambda_B, g_lambda_D)
-        lev_params, int_params, adj_r_square_lev, adj_r_square_int = perform_estimation(x_loc, y_loc)
-        lev_params_int.append(lev_params)
-        adj_r_square_int_lev.append(adj_r_square_lev)
-        adj_r_square_int_int.append(adj_r_square_int)
-
-        # Logic for calculating est_params and est_params2
-       
-        #est_param = calculate_est_param(lev_params, int_params, x_loc, y_loc)  # Replace with your function
-        #est_params.append(est_param)
-        #est_param2 = calculate_est_param2(lev_params, int_params, x_loc, y_loc)  # Replace with your function
-        #est_params2.append(est_param2)
-
-    return og_params, lev_params_int, adj_r_square_int_lev, adj_r_square_int_int, est_params, est_params2
-
-###################################################################################
-
-def perform_estimation(x_loc, y_loc):
-    # Replace this with the actual estimation logic
-    return [np.random.rand(), np.random.rand(), np.random.rand(), np.random.rand()], \
-           [np.random.rand(), np.random.rand(), np.random.rand(), np.random.rand()], \
-           np.random.rand(), np.random.rand()
-
-
-def weighted_error_fourth_second(ltau, lv, ld, llambdab, llambdad, lemp_fourth, lemp_second):
-    LTheo4 = np.array(mom4_serg_log(ltau, lv, ld, llambdab, llambdad))
-    LTheo2 = np.array(mom4_serg_log(ltau, lv, ld, llambdab, llambdad))
-
-
-###################################################################################
-
-def optimized_funcPairs(larr):
-    """
-    Creates pairs of elements from a given array without repeating the same element.
-    """
-    n = len(larr)
-    lpairs = []
-    for i in range(n):
-        for j in range(i + 1, n):
-            lpairs.append([larr[i], larr[j]])
-    return lpairs
-
-def optimized_parse_trials(lparams_list, threshold_ratio):
-    """
-    Processes a list of parameters, filtering out those that do not meet a certain threshold ratio.
-    """
-    threshold_log = np.log(threshold_ratio)
-    log_lparams = np.log(lparams_list)
-    indices_del = set()
-
-    for row in log_lparams:
-        pairs = optimized_funcPairs(row)
-        new_M = np.abs(np.diff(pairs, axis=1)) + (threshold_log + 1) * np.eye(len(row))
-
-        # Using boolean indexing for efficiency
-        index_del_array = np.sum(new_M > threshold_log, axis=0) == len(row)
-        indices_to_delete = np.where(index_del_array)[0]
-        indices_del.update(indices_to_delete)
-
-    # Using advanced indexing to delete indices
-    fin_log_lparams = np.delete(log_lparams, list(indices_del), axis=1)
-    final_params = np.mean(np.exp(fin_log_lparams), axis=0)
-    return final_params
-
-def calculate_log_moments(x_loc, y_loc, tau_list, integration_factor):
-    dx4_log, dy4_log, dx2_log, dy2_log = [], [], [], []
-    for i in tau_list:
-        dx = np.diff(x_loc[::i * integration_factor])
-        dy = np.diff(y_loc[::i * integration_factor])
-        dx4_log.append(np.log10(np.mean(dx**4)))
-        dy4_log.append(np.log10(np.mean(dy**4)))
-        dx2_log.append(np.log10(np.mean(dx**2)))
-        dy2_log.append(np.log10(np.mean(dy**2)))
-    return np.array(dx4_log), np.array(dy4_log), np.array(dx2_log), np
-    
-def safe_log(x, min_val=1e-10, max_val=1e30):
-    """ Compute logarithm, replacing non-positive or extremely large values """
-    x_safe = np.clip(x, min_val, max_val)
-    return np.log(x_safe)
 ###################################################################################
 ###################################################################################
 
