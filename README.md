@@ -1,151 +1,223 @@
-# IntLevy Process
+
+# Intermittent Lévy Processes Package
+
+**Version:** 0.1
 
 ## Overview
-The IntLevy Process project is a specialized Python toolkit for simulating and analyzing intermittent processes and Levy flights. It excels in creating synthetic datasets that replicate the alternating intense and calm periods of intermittent processes, and the long-jump characteristic of Levy flights. This tool is essential for understanding stochastic dynamics in various fields, including physics, ecology, and finance. It's user-friendly and adaptable, offering both theoretical exploration and practical analysis capabilities for real-world data.
 
+The **intermittent_levy** package provides tools for simulating and classifying intermittent and Lévy processes. It includes functions for:
+
+- **Process Simulation:** Generate synthetic intermittent and Lévy flight trajectories.
+- **Statistical Moments:** Calculate theoretical and empirical moments of trajectories.
+- **Optimization:** Fit model parameters to empirical data using optimization techniques.
+- **Classification:** Distinguish between intermittent and Lévy processes using statistical methods.
+- **Utilities:** Common functions for data analysis and processing.
+
+This package is intended for researchers and practitioners working in statistical physics, complex systems, or any field where modeling and analysis of anomalous diffusion processes are relevant.
 
 ## Installation
-### Prerequisites
-- Python 3.x
-- NumPy
-- SciPy
-- Matplotlib
-- scikit-learn
 
+Clone the repository and install the package using pip:
 
-### Installing Dependencies
-Install the required packages using the following command:
 ```bash
-pip install numpy scipy matplotlib scikit-learn
+git clone https://github.com/yourusername/intermittent_levy.git
+cd intermittent_levy
+pip install -e .
 ```
-### Setting Up the Project
 
+*Note:* The `-e` flag installs the package in editable mode, allowing for modifications without reinstallation.
 
-1. Clone the repository or download the source code.
-2. Navigate to the project directory.
-3. Create a new directory named `intermittentLevy` inside the project directory.
-4. Place your custom scripts or modules in the `intermittentLevy` directory.
-5. 5. Ensure the `functions.py` script in the `intermittentLevy` directory contains all the necessary custom functions. The script should define functions such as `intermittent2`, `levy_flight_2D_2`, `load_parameters`, `setup_kde`, `perform_iterations`, `mom4_log`, `to_optimize_mom4_log`, `to_optimize_mom22_4_diff_log`, `mom22_4_diff_log`, `moment4`, `to_optimize_mom4`, `mom22_4_diff`, `to_optimize_mom22_4_diff`, `mom2_model`, `mom4_model`, `form_groups`, `adjusted_r_square`, `powerl_fit`, and `perform_estimation`.
-6. The script expects a file named `intermittent_est_params.txt` for loading parameters. Ensure this file is placed in a location accessible by the script.
+## Dependencies
+
+The package requires the following Python libraries:
+
+- **numpy**
+- **scipy**
+- **matplotlib**
+- **pandas**
+- **seaborn**
+- **scikit-learn**
+- **pomegranate**
+
+These can be installed via pip:
+
+```bash
+pip install numpy scipy matplotlib pandas seaborn scikit-learn pomegranate
+```
 
 ## Usage
-Follow these steps to use the script:
-1. Navigate to the directory containing the script.
-2. Run the script with Python:
-   ```bash
-   python main.py
 
-### Operations performed by the script:
-. Load parameters and set up Kernel Density Estimation (KDE).
-. Perform iterations to simulate intermittent Levy flights.
-. Generate synthetic data and perform curve fitting.
-. Create and save plots for data visualization.
-. Write summary results to text files.
-### Output
-- Plots visualizing the synthetic data and model fits.
-- Text files containing summary results:
-  - `summary_og_params.txt`
-  - `summary_levy_params.txt`
-  - `summary_adj_r_square_levy.txt`
-  - `summary_adj_r_square_int.txt`
-  - `summary_est_params.txt`
-  - `summary_est_params2.txt`
+### Example: Running a Simulation and Classification
 
-## Example Notebook
+An example script is provided in the `examples/` directory. Here's how you can simulate an intermittent process and perform parameter estimation:
 
-An example notebook is provided to demonstrate the usage of the IntLevy Process toolkit. This notebook guides you through the steps to distinguish between intermittent processes and Levy flights, showcasing how to simulate these processes, analyze their characteristics, and differentiate between them.
+```python
+from intermittent_levy.processes import intermittent3
+from intermittent_levy.moments import mom2_serg_log, mom4_serg_log
+from intermittent_levy.optimization import to_optimize_mom4_and_2_serg_log
+from intermittent_levy.classification import form_groups
+from intermittent_levy.utils import adjusted_r_square
+from scipy import optimize
+import numpy as np
+import matplotlib.pyplot as plt
 
-Access the notebook here: [Example Notebook](https://github.com/shailendrabhandari/IntLevy-Processes/blob/main/example.ipynb)
+# Simulation parameters
+N = 300000
+dt = 1
+mean_bal_sac = 10
+diffusion = 0.1
+rate21 = 0.1
+rate12 = 0.05
 
-### Quick Start
+# Simulate intermittent process
+x, y = intermittent3(N, dt, mean_bal_sac, diffusion, rate21, rate12)
 
-1. **Access the Notebook**: Use the link to view and download the notebook from GitHub.
-2. **Run the Notebook**: Open it in Jupyter Notebook or JupyterLab on your local setup, or use an online platform like Google Colab.
-3. **Follow the Steps**: The notebook includes step-by-step instructions and explanations, guiding you through simulations and analyses.
-4. **Interactive Learning**: Experiment with the code, alter parameters, and observe the differences between intermittent and Levy flight processes.
+# Compute displacements
+dS = np.sqrt(np.diff(x)**2 + np.diff(y)**2)
 
-For a detailed understanding, please refer to the comments and documentation within the notebook.
+# Define time lags
+tau_list = np.arange(1, 20)
 
-## Stochastic Processes Simulation
+# Calculate empirical moments
+dx2 = [np.mean((x[::int(tau)] - x[:-int(tau):int(tau)])**2 +
+               (y[::int(tau)] - y[:-int(tau):int(tau)])**2) for tau in tau_list]
+dx4 = [np.mean(((x[::int(tau)] - x[:-int(tau):int(tau)])**2 +
+                (y[::int(tau)] - y[:-int(tau):int(tau)])**2)**2) for tau in tau_list]
 
-### `intermittent2(nt, dt, mean_bal_sac, diffusion, rate21, rate12)`
-- **Description**: Simulates an intermittent stochastic process in 2D.
-- **Parameters**:
-  - `nt`: Number of time points (int).
-  - `dt`: Time step size (float).
-  - `mean_bal_sac`: Mean balance of sacs (float).
-  - `diffusion`: Diffusion coefficient (float).
-  - `rate21`, `rate12`: Transition rates between states (float).
-- **Returns**: Simulated x and y coordinates (arrays).
+dx2_log = np.log(dx2)
+dx4_log = np.log(dx4)
 
-### `levy_flight_2D_2(n_redirections, n_max, lalpha, tmin, measuring_dt)`
-- **Description**: Simulates a 2D Levy flight with specified parameters.
-- **Parameters**:
-  - `n_redirections`: Number of redirections in the flight (int).
-  - `n_max`: Maximum number of steps (int).
-  - `lalpha`: Levy flight parameter alpha (float).
-  - `tmin`: Minimum time between redirections (float).
-  - `measuring_dt`: Measurement time step (float).
-- **Returns**: x and y coordinates of the Levy flight, time of redirections (arrays).
+# Initial parameter estimates
+initial_params = [mean_bal_sac, diffusion, rate21, rate12]
 
+# Optimization bounds
+bounds = [
+    (initial_params[0]/10, initial_params[0]*10),
+    (initial_params[1]/10, initial_params[1]*10),
+    (initial_params[2]/10, initial_params[2]*10),
+    (initial_params[3]/10, initial_params[3]*10),
+]
 
+# Perform optimization
+result = optimize.dual_annealing(
+    to_optimize_mom4_and_2_serg_log,
+    bounds=bounds,
+    args=(tau_list, dx2_log, dx4_log)
+)
 
-## Moment Calculations
-#### `moment4(t, v0, D, lambdaB, lambdaD)`
-- Calculates the logarithm of the fourth moment of a stochastic process. Useful in analyzing the dynamics of processes over time with given initial velocity and diffusion coefficients.
+# Extract optimized parameters
+optimized_params = result.x
 
-#### `mom4_log(t, v0, D, lambdaB, lambdaD)`
-- imilar to moment4, it calculates the logarithm of the fourth moment, specifically designed for processes with certain characteristics.
+# Calculate fitted moments
+fitted_dx2_log = mom2_serg_log(tau_list, *optimized_params)
+fitted_dx4_log = mom4_serg_log(tau_list, *optimized_params)
 
-#### `mom2_model(tau, param1, param2)`
-- Defines the model for the second moment, offering a way to represent stochastic processes based on input values and parameters.
+# Calculate adjusted R-squared
+r2_dx2 = adjusted_r_square(dx2_log, fitted_dx2_log, degrees_freedom=4)
+r2_dx4 = adjusted_r_square(dx4_log, fitted_dx4_log, degrees_freedom=4)
 
+# Plot empirical and fitted moments
+plt.figure(figsize=(12, 5))
 
-#### `mom2_log(l_tau, v, D, l_lambdaB, l_lambdaD)`
-- Defines a logarithm of a second moment model.
+plt.subplot(1, 2, 1)
+plt.plot(np.log(tau_list), dx2_log, 'o', label='Empirical log M2')
+plt.plot(np.log(tau_list), fitted_dx2_log, '-', label='Fitted log M2')
+plt.xlabel('log(tau)')
+plt.ylabel('log(M2)')
+plt.legend()
 
+plt.subplot(1, 2, 2)
+plt.plot(np.log(tau_list), dx4_log, 'o', label='Empirical log M4')
+plt.plot(np.log(tau_list), fitted_dx4_log, '-', label='Fitted log M4')
+plt.xlabel('log(tau)')
+plt.ylabel('log(M4)')
+plt.legend()
 
-#### `to_optimize_mom4_serg(params)`
--  Optimizes the parameters for the `mom4_serg_log` function based on input data.
+plt.tight_layout()
+plt.show()
+```
 
-#### `to_optimize_mom22_4_diff(params)`
-- Optimizes the parameters for the `mom22_4_diff_serg_log` function based on input data.
+### Running the Example Script
 
-#### `mom22_4_diff_log(l_tau, v, D, l_lambdaB, l_lambdaD)`
-- Computes a ration of fourth and the square of second moment in logarithmic form.
-#### `powerl_fit(l_x, l_c, l_a)`:
-Calculates the value of a power-law function for given parameters, useful in modeling phenomena that follow a power-law distribution.
+To run the example script:
 
-#### `r_square(l_emp_points, l_emp_fit)`:
-Computes the R-squared value, indicating the fit quality of a regression model to empirical data.
+```bash
+python examples/run_simulation.py
+```
+
+## Package Structure
+
+The package is organized into the following modules and subpackages:
+
+```
+intermittent_levy/
+├── __init__.py
+├── processes.py          # Simulation of intermittent and Lévy processes
+├── moments.py            # Calculation of statistical moments
+├── optimization.py       # Optimization routines for parameter estimation
+├── classification.py     # Classification methods for process analysis
+├── utils.py              # Utility functions for data processing
+├── examples/
+│   └── run_simulation.py # Example script demonstrating usage
+├── tests/                # Unit tests for the package
+│   ├── __init__.py
+│   ├── test_processes.py
+│   ├── test_moments.py
+│   ├── test_optimization.py
+│   ├── test_classification.py
+│   └── test_utils.py
+├── setup.py              # Installation script
+└── README.md             # Package documentation
+```
+
+### Module Descriptions
+
+- **intermittent_levy.processes**
+  - `intermittent3`: Simulate intermittent processes with specified parameters.
+  - `levy_flight_2D_Simplified`: Simulate 2D Lévy flights.
+  
+- **intermittent_levy.moments**
+  - `mom2_serg_log`: Calculate the logarithm of the second moment.
+  - `mom4_serg_log`: Calculate the logarithm of the fourth moment.
+  
+- **intermittent_levy.optimization**
+  - `to_optimize_mom4_and_2_serg_log`: Objective function for optimizing parameters based on moments.
+  
+- **intermittent_levy.classification**
+  - `form_groups`: Classify data into groups based on thresholds.
+  - `real_k_and_fisher`: Statistical analysis using Fisher's exact test.
+  
+- **intermittent_levy.utils**
+  - `adjusted_r_square`: Calculate the adjusted R-squared value.
+  - `r_square`: Calculate the R-squared value.
+  
+- **intermittent_levy.examples**
+  - `run_simulation.py`: Example script demonstrating how to use the package.
+  
+- **intermittent_levy.tests**
+  - Unit tests for each module to ensure code reliability and correctness.
+
+## Contributing
+
+Contributions are welcome! Please follow these steps:
+
+1. **Fork the Repository:** Create your own fork of the project.
+2. **Create a Branch:** Create a new branch for your feature or bug fix.
+3. **Commit Changes:** Make your changes and commit them with descriptive messages.
+4. **Push to Branch:** Push your changes to your forked repository.
+5. **Submit a Pull Request:** Submit a pull request to the `main` branch of the original repository.
+
+Please ensure your code adheres to the project's coding standards and passes all existing tests. Adding new tests for your contributions is highly appreciated.
 
 ## License
-This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/shailendrabhandari/IntLevy-Processes/blob/main/LICENSE) file for details.
 
-### MIT License Copyright (c)
+This project is licensed under the [MIT License](LICENSE).
 
-Copyright (c) 2024 authors 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+## Contact
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+**Author:** Shailendra Bhanari, Pedro Lencastre
+**Email:** shailendra.bhandari@oslomet.no, pedroreg@oslomet.no
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-
-## Authors
-
-**Pedro Lencastre**
-**Shailendra Bhandari**
+For any questions or inquiries, please feel free to reach out via email.
 
 
