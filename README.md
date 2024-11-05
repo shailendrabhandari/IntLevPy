@@ -1,3 +1,4 @@
+
 # Intermittent Lévy Processes Package
 
 **Version:** 0.1
@@ -28,21 +29,11 @@ pip install -e .
 
 ## Dependencies
 
-The package requires the following Python libraries:
-
-- **numpy**
-- **scipy**
-- **matplotlib**
-- **pandas**
-- **seaborn**
-- **scikit-learn**
-- **pomegranate**
-
-These can be installed via pip:
+Install all required dependencies using:
 
 ```bash
-pip install numpy scipy matplotlib pandas seaborn scikit-learn pomegranate
-```
+pip install -r requirements.txt
+
 
 ## Usage
 
