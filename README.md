@@ -40,12 +40,12 @@ pip install -r requirements.txt
 
 ### Example 1: Simulating and Analyzing an Intermittent Process
 
-An example script is provided in the `examples/` directory as `run_simulation.py`. This script demonstrates how to simulate an intermittent process and perform parameter estimation.
+An example script is provided in the `examples/` directory as `run_intermittent_simulation.py`. This script demonstrates how to simulate an intermittent process and perform parameter estimation.
 
 #### Running the Example Script
 
 ```bash
-python examples/run_simulation.py
+python examples/run_intermittent_simulation.py
 ```
 
 #### Script Overview
