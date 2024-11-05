@@ -13,7 +13,7 @@ from intermittent_levy.utils import adjusted_r_square
 from scipy import optimize
 
 # Initialize parameters
-Nr_iterations = 1  # Set to 1 for testing
+Nr_iterations = 4  # Set to 1 for testing
 tau_list = np.arange(1, 20)  # Define your tau_list appropriately
 
 # Lists to store results

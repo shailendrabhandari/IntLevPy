@@ -2,10 +2,11 @@ Metadata-Version: 2.1
 Name: intermittent_levy
 Version: 0.1
 Summary: Package for classifying intermittent and Lévy processes
-Author: Your Name
-Author-email: your.email@example.com
+Author: Shailendra Bhandari & Pedro Lencastre
+Author-email: shailendra.bhandari@oslomet.no
 Classifier: Programming Language :: Python :: 3
 Classifier: Operating System :: OS Independent
+License-File: LICENSE
 Requires-Dist: numpy
 Requires-Dist: scipy
 Requires-Dist: matplotlib

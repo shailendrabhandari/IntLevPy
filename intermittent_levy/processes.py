@@ -70,37 +70,44 @@ def wait_times(taui, lN, lalpha):
     return taui * (np.random.uniform(0, 1, lN) ** (-1 / (lalpha - 1)) - 1)
 
 
-def levy_flight_2D_Simplified(n_redirections, n_max, lalpha, tmin, v_mean, measuring_dt):
-    if lalpha <= 1:
-        print("alpha should be larger than 1")
-        return None, None
+def levy_flight_2D_Simplified(n_redirections, n_max, alpha, tmin, v_mean, measuring_dt):
+    """
+    Simulate a 2D Lévy flight with specified parameters.
 
-    t_redirection = wait_times(tmin, n_redirections, lalpha)
-    angle = np.random.rand(len(t_redirection)) * 2 * math.pi
-    x_increments = t_redirection * np.cos(angle) * v_mean
-    y_increments = t_redirection * np.sin(angle) * v_mean
-    l_x_list = np.cumsum(x_increments)
-    l_y_list = np.cumsum(y_increments)
-    total_time = np.cumsum(t_redirection)
+    Parameters:
+    n_redirections (int): Number of redirections (flight steps).
+    n_max (int): Maximum number of measurement points.
+    alpha (float): Lévy distribution exponent (1 < alpha < 3).
+    tmin (float): Minimum flight time.
+    v_mean (float): Mean velocity.
+    measuring_dt (float): Time interval for measurements.
 
-    if n_max * measuring_dt < total_time[-1]:
-        x_measured = np.interp(
-            np.arange(0, n_max * measuring_dt, measuring_dt), total_time, l_x_list
-        )
-        y_measured = np.interp(
-            np.arange(0, n_max * measuring_dt, measuring_dt), total_time, l_y_list
-        )
-    else:
-        n_max = int(total_time[-1] / measuring_dt)
-        print(
-            "Measuring time greater than simulated time. n_max becomes " + str(n_max)
-        )
-        x_measured = np.interp(
-            np.arange(0, n_max * measuring_dt, measuring_dt), total_time, l_x_list
-        )
-        y_measured = np.interp(
-            np.arange(0, n_max * measuring_dt, measuring_dt), total_time, l_y_list
-        )
+    Returns:
+    tuple: Arrays of x and y positions at measurement times.
+    """
+    if alpha <= 1 or alpha >= 3:
+        raise ValueError("alpha should be in the range (1, 3)")
+
+    # Generate waiting times from a Lévy distribution
+    t_redirection = tmin * (np.random.uniform(0, 1, n_redirections) ** (-1 / (alpha - 1)) - 1)
+
+    # Generate random flight angles
+    angles = np.random.uniform(0, 2 * np.pi, n_redirections)
+
+    # Calculate increments
+    x_increments = t_redirection * np.cos(angles) * v_mean
+    y_increments = t_redirection * np.sin(angles) * v_mean
+
+    # Cumulative sums to get positions
+    x_positions = np.cumsum(x_increments)
+    y_positions = np.cumsum(y_increments)
+    time_points = np.cumsum(t_redirection)
+
+    # Interpolate positions at measurement times
+    total_time = time_points[-1]
+    measurement_times = np.arange(0, min(n_max * measuring_dt, total_time), measuring_dt)
+
+    x_measured = np.interp(measurement_times, time_points, x_positions)
+    y_measured = np.interp(measurement_times, time_points, y_positions)
 
     return x_measured, y_measured
-

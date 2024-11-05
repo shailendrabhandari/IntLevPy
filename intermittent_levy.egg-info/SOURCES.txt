@@ -1,3 +1,4 @@
+LICENSE
 README.md
 setup.py
 intermittent_levy/__init__.py

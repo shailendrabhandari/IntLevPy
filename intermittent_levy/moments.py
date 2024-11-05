@@ -79,3 +79,41 @@ def theor_levy_moment(n_mom, alpha, v, t, tmin):
     den = (tmin ** 2) * (2 + n_mom - alpha) * (1 + n_mom - alpha)
     return num / den
 
+def levy_moments_log(n_mom, alpha, v_mean, t_list, tmin):
+    """
+    Calculate the theoretical logarithm of the nth moment for Lévy flights.
+
+    Parameters:
+    n_mom (int): The order of the moment (e.g., 2 or 4).
+    alpha (float): Lévy distribution exponent (1 < alpha < 3).
+    v_mean (float): Mean velocity.
+    t_list (array-like): List of time lags.
+    tmin (float): Minimum flight time.
+
+    Returns:
+    array: Logarithm of the theoretical moments.
+    """
+    num = (tmin ** alpha) * (v_mean ** n_mom) * n_mom * (alpha - 2) * t_list ** (2 + n_mom - alpha)
+    den = (tmin ** 2) * (2 + n_mom - alpha) * (1 + n_mom - alpha)
+    moments = num / den
+    return np.log(moments)
+
+
+def levy_moments_log(n_mom, alpha, v_mean, t_list, tmin):
+    """
+    Calculate the theoretical logarithm of the nth moment for Lévy flights.
+
+    Parameters:
+    n_mom (int): The order of the moment (e.g., 2 or 4).
+    alpha (float): Lévy distribution exponent (1 < alpha < 3).
+    v_mean (float): Mean velocity.
+    t_list (array-like): List of time lags.
+    tmin (float): Minimum flight time.
+
+    Returns:
+    array: Logarithm of the theoretical moments.
+    """
+    num = (tmin ** alpha) * (v_mean ** n_mom) * n_mom * (alpha - 2) * t_list ** (2 + n_mom - alpha)
+    den = (tmin ** 2) * (2 + n_mom - alpha) * (1 + n_mom - alpha)
+    moments = num / den
+    return np.log(moments)
