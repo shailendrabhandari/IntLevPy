@@ -20,7 +20,7 @@ This package is intended for researchers and practitioners working in statistica
 Clone the repository and install the package using pip:
 
 ```bash
-git clone https://github.com/yourusername/intermittent_levy.git
+git clone https://github.com/shailendrabhandari/IntLevy-Processes.git
 cd intermittent_levy
 pip install -e .
 ```
