@@ -5,9 +5,13 @@ import matplotlib.pyplot as plt
 from intermittent_levy.processes import levy_flight_2D_Simplified
 from intermittent_levy.moments import levy_moments_log
 from intermittent_levy.optimization import to_optimize_levy
-from intermittent_levy.classification import form_groups
 from intermittent_levy.utils import adjusted_r_square, adjusted_r_square_array
 from scipy import optimize
+import os  # Import os module
+
+# Define the results directory
+results_dir = 'results/levy'
+os.makedirs(results_dir, exist_ok=True)
 
 # Initialize parameters
 Nr_iterations = 5
@@ -68,13 +72,6 @@ for itera in range(Nr_iterations):
     gen_dx2_log_list.append(dx2_log)
     gen_dx4_log_list.append(dx4_log)
 
-    # Compare with theoretical moments
-    # Assuming you have precomputed theoretical moments (list_series_mom2, list_series_mom4)
-    # For this example, let's assume we have them as empty arrays
-    # You need to load or compute these arrays appropriately
-    # For demonstration, I'll proceed without them
-
-    # Here, we can perform optimization to estimate alpha and v_mean
     # Initial guesses
     initial_alpha = 2.5
     initial_v_mean = gv
@@ -127,10 +124,10 @@ for itera in range(Nr_iterations):
         plt.show()
 
 # After all iterations, you can save the collected data
-np.savetxt('lev_generated_params.txt', lev_params)
-np.savetxt('lev_generated_r_squared_lev.txt', r_squared_lev)
-np.savetxt('lev_generated_opt_list_lev_params.txt', opt_list_lev_params)
-np.savetxt('lev_generated_lev_fit_list_mom2.txt', lev_fit_list_mom2)
-np.savetxt('lev_generated_lev_fit_list_mom4.txt', lev_fit_list_mom4)
-np.savetxt('lev_generated_logdx2_list.txt', gen_dx2_log_list)
-np.savetxt('lev_generated_logdx4_list.txt', gen_dx4_log_list)
+np.savetxt(os.path.join(results_dir, 'lev_generated_params.txt'), lev_params)
+np.savetxt(os.path.join(results_dir, 'lev_generated_r_squared_lev.txt'), r_squared_lev)
+np.savetxt(os.path.join(results_dir, 'lev_generated_opt_list_lev_params.txt'), opt_list_lev_params)
+np.savetxt(os.path.join(results_dir, 'lev_generated_lev_fit_list_mom2.txt'), lev_fit_list_mom2)
+np.savetxt(os.path.join(results_dir, 'lev_generated_lev_fit_list_mom4.txt'), lev_fit_list_mom4)
+np.savetxt(os.path.join(results_dir, 'lev_generated_logdx2_list.txt'), gen_dx2_log_list)
+np.savetxt(os.path.join(results_dir, 'lev_generated_logdx4_list.txt'), gen_dx4_log_list)

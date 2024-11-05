@@ -1,19 +1,21 @@
-# run_simulation.py
+# run_intermittent_simulation.py
 
 import numpy as np
 import matplotlib.pyplot as plt
 from intermittent_levy.processes import intermittent3
 from intermittent_levy.moments import mom2_serg_log, mom4_serg_log
-from intermittent_levy.optimization import (
-    to_optimize_mom4_and_2_serg_log,
-    # Include other optimization functions as needed
-)
+from intermittent_levy.optimization import to_optimize_mom4_and_2_serg_log
 from intermittent_levy.classification import form_groups
 from intermittent_levy.utils import adjusted_r_square
 from scipy import optimize
+import os  # Import os module
+
+# Define the results directory
+results_dir = 'results/intermittent'
+os.makedirs(results_dir, exist_ok=True)
 
 # Initialize parameters
-Nr_iterations = 4  # Set to 1 for testing
+Nr_iterations = 4  # Adjust as needed
 tau_list = np.arange(1, 20)  # Define your tau_list appropriately
 
 # Lists to store results
@@ -141,6 +143,11 @@ for itera in range(Nr_iterations):
     plt.tight_layout()
     plt.show()
 
-# Save results if needed
-# np.savetxt('int_generated_params.txt', int_params)
-
+# Save results into the results directory
+np.savetxt(os.path.join(results_dir, 'int_generated_params.txt'), int_params)
+np.savetxt(os.path.join(results_dir, 'int_generated_r_squared_int.txt'), r_squared_int)
+np.savetxt(os.path.join(results_dir, 'int_generated_opt_list_int_params.txt'), opt_list_int_params)
+np.savetxt(os.path.join(results_dir, 'int_generated_int_fit_list_mom2.txt'), int_fit_list_mom2)
+np.savetxt(os.path.join(results_dir, 'int_generated_int_fit_list_mom4.txt'), int_fit_list_mom4)
+np.savetxt(os.path.join(results_dir, 'int_generated_logdx2_list.txt'), gen_dx2_log_list)
+np.savetxt(os.path.join(results_dir, 'int_generated_logdx4_list.txt'), gen_dx4_log_list)
