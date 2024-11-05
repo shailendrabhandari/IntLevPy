@@ -1,11 +1,10 @@
-
 # Intermittent Lévy Processes Package
 
 **Version:** 0.1
 
 ## Overview
 
-The **intermittent_levy** package provides tools for simulating and classifying intermittent and Lévy processes. It includes functions for:
+The **intermittent_levy** package provides tools for simulating and analyzing intermittent and Lévy processes. It includes functions for:
 
 - **Process Simulation:** Generate synthetic intermittent and Lévy flight trajectories.
 - **Statistical Moments:** Calculate theoretical and empirical moments of trajectories.
@@ -21,7 +20,7 @@ Clone the repository and install the package using pip:
 
 ```bash
 git clone https://github.com/shailendrabhandari/IntLevy-Processes.git
-cd intermittent_levy
+cd IntLevy-Processes
 pip install -e .
 ```
 
@@ -47,102 +46,69 @@ pip install numpy scipy matplotlib pandas seaborn scikit-learn pomegranate
 
 ## Usage
 
-### Example: Running a Simulation and Classification
+### Example 1: Simulating and Analyzing an Intermittent Process
 
-An example script is provided in the `examples/` directory. Here's how you can simulate an intermittent process and perform parameter estimation:
+An example script is provided in the `examples/` directory as `run_simulation.py`. This script demonstrates how to simulate an intermittent process and perform parameter estimation.
 
-```python
-from intermittent_levy.processes import intermittent3
-from intermittent_levy.moments import mom2_serg_log, mom4_serg_log
-from intermittent_levy.optimization import to_optimize_mom4_and_2_serg_log
-from intermittent_levy.classification import form_groups
-from intermittent_levy.utils import adjusted_r_square
-from scipy import optimize
-import numpy as np
-import matplotlib.pyplot as plt
-
-# Simulation parameters
-N = 300000
-dt = 1
-mean_bal_sac = 10
-diffusion = 0.1
-rate21 = 0.1
-rate12 = 0.05
-
-# Simulate intermittent process
-x, y = intermittent3(N, dt, mean_bal_sac, diffusion, rate21, rate12)
-
-# Compute displacements
-dS = np.sqrt(np.diff(x)**2 + np.diff(y)**2)
-
-# Define time lags
-tau_list = np.arange(1, 20)
-
-# Calculate empirical moments
-dx2 = [np.mean((x[::int(tau)] - x[:-int(tau):int(tau)])**2 +
-               (y[::int(tau)] - y[:-int(tau):int(tau)])**2) for tau in tau_list]
-dx4 = [np.mean(((x[::int(tau)] - x[:-int(tau):int(tau)])**2 +
-                (y[::int(tau)] - y[:-int(tau):int(tau)])**2)**2) for tau in tau_list]
-
-dx2_log = np.log(dx2)
-dx4_log = np.log(dx4)
-
-# Initial parameter estimates
-initial_params = [mean_bal_sac, diffusion, rate21, rate12]
-
-# Optimization bounds
-bounds = [
-    (initial_params[0]/10, initial_params[0]*10),
-    (initial_params[1]/10, initial_params[1]*10),
-    (initial_params[2]/10, initial_params[2]*10),
-    (initial_params[3]/10, initial_params[3]*10),
-]
-
-# Perform optimization
-result = optimize.dual_annealing(
-    to_optimize_mom4_and_2_serg_log,
-    bounds=bounds,
-    args=(tau_list, dx2_log, dx4_log)
-)
-
-# Extract optimized parameters
-optimized_params = result.x
-
-# Calculate fitted moments
-fitted_dx2_log = mom2_serg_log(tau_list, *optimized_params)
-fitted_dx4_log = mom4_serg_log(tau_list, *optimized_params)
-
-# Calculate adjusted R-squared
-r2_dx2 = adjusted_r_square(dx2_log, fitted_dx2_log, degrees_freedom=4)
-r2_dx4 = adjusted_r_square(dx4_log, fitted_dx4_log, degrees_freedom=4)
-
-# Plot empirical and fitted moments
-plt.figure(figsize=(12, 5))
-
-plt.subplot(1, 2, 1)
-plt.plot(np.log(tau_list), dx2_log, 'o', label='Empirical log M2')
-plt.plot(np.log(tau_list), fitted_dx2_log, '-', label='Fitted log M2')
-plt.xlabel('log(tau)')
-plt.ylabel('log(M2)')
-plt.legend()
-
-plt.subplot(1, 2, 2)
-plt.plot(np.log(tau_list), dx4_log, 'o', label='Empirical log M4')
-plt.plot(np.log(tau_list), fitted_dx4_log, '-', label='Fitted log M4')
-plt.xlabel('log(tau)')
-plt.ylabel('log(M4)')
-plt.legend()
-
-plt.tight_layout()
-plt.show()
-```
-
-### Running the Example Script
-
-To run the example script:
+#### Running the Example Script
 
 ```bash
 python examples/run_simulation.py
+```
+
+#### Script Overview
+
+The script performs the following steps:
+
+1. **Simulates** an intermittent process using `intermittent3` with random parameters within specified ranges.
+2. **Calculates** the empirical second and fourth moments of the displacements.
+3. **Performs Classification** to separate different movement phases using statistical methods.
+4. **Performs Optimization** to estimate the model parameters by fitting theoretical moments to empirical data.
+5. **Stores** the optimized parameters and R-squared values for analysis.
+6. **Plots** the empirical and fitted moments for visualization.
+
+### Example 2: Simulating and Analyzing Multiple Lévy Flights
+
+An example script is provided in the `examples/` directory as `run_levy_simulation.py`. This script demonstrates how to simulate multiple Lévy flights over multiple iterations and perform parameter estimation.
+
+#### Running the Example Script
+
+```bash
+python examples/run_levy_simulation.py
+```
+
+#### Script Overview
+
+The script performs the following steps:
+
+1. **Simulates** multiple Lévy flights with random parameters within specified ranges.
+2. **Calculates** the empirical second and fourth moments of the displacements.
+3. **Performs Optimization** to estimate the Lévy exponent `alpha` and mean velocity `v_mean` by fitting theoretical moments to empirical data.
+4. **Stores** the optimized parameters and R-squared values for analysis.
+5. **Plots** the empirical and fitted moments for the first few iterations.
+
+### Results Directory
+
+Both scripts save their results into a dedicated `results/` directory with subdirectories for each process type:
+
+```
+results/
+├── intermittent/
+│   ├── int_generated_params.txt
+│   ├── int_generated_r_squared_int.txt
+│   ├── int_generated_opt_list_int_params.txt
+│   ├── int_generated_int_fit_list_mom2.txt
+│   ├── int_generated_int_fit_list_mom4.txt
+│   ├── int_generated_logdx2_list.txt
+│   └── int_generated_logdx4_list.txt
+└── levy/
+    ├── lev_generated_params.txt
+    ├── lev_generated_r_squared_lev.txt
+    ├── lev_generated_opt_list_lev_params.txt
+    ├── lev_generated_lev_fit_list_mom2.txt
+    ├── lev_generated_lev_fit_list_mom4.txt
+    ├── lev_generated_logdx2_list.txt
+    └── lev_generated_logdx4_list.txt
 ```
 
 ## Package Structure
@@ -158,7 +124,8 @@ intermittent_levy/
 ├── classification.py     # Classification methods for process analysis
 ├── utils.py              # Utility functions for data processing
 ├── examples/
-│   └── run_simulation.py # Example script demonstrating usage
+│   ├── run_simulation.py          # Example script for intermittent processes
+│   └── run_levy_simulation.py     # Example script for Lévy processes
 ├── tests/                # Unit tests for the package
 │   ├── __init__.py
 │   ├── test_processes.py
@@ -175,25 +142,29 @@ intermittent_levy/
 - **intermittent_levy.processes**
   - `intermittent3`: Simulate intermittent processes with specified parameters.
   - `levy_flight_2D_Simplified`: Simulate 2D Lévy flights.
-  
+
 - **intermittent_levy.moments**
-  - `mom2_serg_log`: Calculate the logarithm of the second moment.
-  - `mom4_serg_log`: Calculate the logarithm of the fourth moment.
-  
+  - `mom2_serg_log`: Calculate the logarithm of the second moment for intermittent processes.
+  - `mom4_serg_log`: Calculate the logarithm of the fourth moment for intermittent processes.
+  - `levy_moments_log`: Calculate the logarithm of the moments for Lévy flights.
+
 - **intermittent_levy.optimization**
-  - `to_optimize_mom4_and_2_serg_log`: Objective function for optimizing parameters based on moments.
-  
+  - `to_optimize_mom4_and_2_serg_log`: Objective function for optimizing intermittent process parameters based on moments.
+  - `to_optimize_levy`: Objective function for optimizing Lévy flight parameters.
+
 - **intermittent_levy.classification**
   - `form_groups`: Classify data into groups based on thresholds.
   - `real_k_and_fisher`: Statistical analysis using Fisher's exact test.
-  
+
 - **intermittent_levy.utils**
   - `adjusted_r_square`: Calculate the adjusted R-squared value.
   - `r_square`: Calculate the R-squared value.
-  
+  - `adjusted_r_square_array`: Calculate adjusted R-squared for multiple fits.
+
 - **intermittent_levy.examples**
-  - `run_simulation.py`: Example script demonstrating how to use the package.
-  
+  - `run_simulation.py`: Example script demonstrating how to simulate and analyze intermittent processes.
+  - `run_levy_simulation.py`: Example script demonstrating how to simulate and analyze Lévy processes.
+
 - **intermittent_levy.tests**
   - Unit tests for each module to ensure code reliability and correctness.
 
@@ -211,13 +182,17 @@ Please ensure your code adheres to the project's coding standards and passes all
 
 ## License
 
-This project is licensed under the [MIT License](LICENSE).
+This project is licensed under the [MIT License](https://github.com/shailendrabhandari/IntLevy-Processes/blob/main/LICENSE).
 
 ## Contact
 
-**Author:** Shailendra Bhanari, Pedro Lencastre
-**Email:** shailendra.bhandari@oslomet.no, pedroreg@oslomet.no
+**Authors:**
+
+- **Shailendra Bhandari**
+  - **Email:** shailendra.bhandari@oslomet.no
+- **Pedro Lencastre**
+  - **Email:** pedroreg@oslomet.no
 
 For any questions or inquiries, please feel free to reach out via email.
 
-
+---
