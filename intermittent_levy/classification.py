@@ -25,6 +25,7 @@ def real_k_and_fisher(binary_vector):
     detection = []
 
     fisher_p_value = fisher_exact(matrix)[1]
+    p_value = np.clip(p_value, a_min=1e-10, a_max=None)
     detectionfisher.append(np.log(fisher_p_value))
 
     p = matrix.sum(axis=1)[0] / matrix.sum()

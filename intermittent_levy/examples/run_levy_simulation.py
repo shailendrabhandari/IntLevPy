@@ -14,7 +14,7 @@ results_dir = 'results/levy'
 os.makedirs(results_dir, exist_ok=True)
 
 # Initialize parameters
-Nr_iterations = 5
+Nr_iterations = 10
 tau_list = np.arange(1, 20)
 
 # Parameter ranges for simulation
