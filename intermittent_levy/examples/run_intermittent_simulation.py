@@ -15,7 +15,7 @@ results_dir = 'results/intermittent'
 os.makedirs(results_dir, exist_ok=True)
 
 # Initialize parameters
-Nr_iterations = 11  # Adjust as needed
+Nr_iterations = 200  # Adjust as needed
 tau_list = np.arange(1, 20)  # Define your tau_list appropriately
 
 # Lists to store results
