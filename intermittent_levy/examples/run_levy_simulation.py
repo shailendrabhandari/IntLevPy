@@ -14,7 +14,7 @@ results_dir = 'results/levy'
 os.makedirs(results_dir, exist_ok=True)
 
 # Initialize parameters
-Nr_iterations = 10
+Nr_iterations = 200
 tau_list = np.arange(1, 20)
 
 # Parameter ranges for simulation
@@ -101,27 +101,39 @@ for itera in range(Nr_iterations):
     lev_fit_list_mom4.append(fitted_dx4_log)
     opt_list_lev_params.append([optimized_v_mean, gtmin, optimized_alpha])
 
-    # Plot results for the first few iterations
-    if itera < 5:
-        plt.figure(figsize=(12, 5))
+# Convert lists to arrays for averaging
+gen_dx2_log_array = np.array(gen_dx2_log_list)
+gen_dx4_log_array = np.array(gen_dx4_log_list)
+lev_fit_list_mom2_array = np.array(lev_fit_list_mom2)
+lev_fit_list_mom4_array = np.array(lev_fit_list_mom4)
 
-        plt.subplot(1, 2, 1)
-        plt.plot(np.log(tau_list), dx2_log, 'o', label='Empirical log M2')
-        plt.plot(np.log(tau_list), fitted_dx2_log, '-', label='Fitted log M2')
-        plt.xlabel('log(tau)')
-        plt.ylabel('log(M2)')
-        plt.legend()
+# Calculate the average across all iterations
+avg_dx2_log = np.mean(gen_dx2_log_array, axis=0)
+avg_dx4_log = np.mean(gen_dx4_log_array, axis=0)
+avg_fitted_dx2_log = np.mean(lev_fit_list_mom2_array, axis=0)
+avg_fitted_dx4_log = np.mean(lev_fit_list_mom4_array, axis=0)
 
-        plt.subplot(1, 2, 2)
-        plt.plot(np.log(tau_list), dx4_log, 'o', label='Empirical log M4')
-        plt.plot(np.log(tau_list), fitted_dx4_log, '-', label='Fitted log M4')
-        plt.xlabel('log(tau)')
-        plt.ylabel('log(M4)')
-        plt.legend()
+# Plot the average results
+plt.figure(figsize=(10, 5))
 
-        plt.suptitle(f"Iteration {itera + 1}: alpha={optimized_alpha:.4f}, v_mean={optimized_v_mean:.4f}")
-        plt.tight_layout()
-        plt.show()
+# Plotting average empirical log M2 and average fitted log M2
+plt.subplot(1, 2, 1)
+plt.plot(np.log(tau_list), avg_dx2_log, 'o', label='Average Empirical log M2')
+plt.plot(np.log(tau_list), avg_fitted_dx2_log, '-', label='Average Fitted log M2')
+plt.xlabel('log(tau)')
+plt.ylabel('log(M2)')
+plt.legend()
+
+# Plotting average empirical log M4 and average fitted log M4
+plt.subplot(1, 2, 2)
+plt.plot(np.log(tau_list), avg_dx4_log, 'o', label='Average Empirical log M4')
+plt.plot(np.log(tau_list), avg_fitted_dx4_log, '-', label='Average Fitted log M4')
+plt.xlabel('log(tau)')
+plt.ylabel('log(M4)')
+plt.legend()
+
+plt.tight_layout()
+plt.show()
 
 # After all iterations, you can save the collected data
 np.savetxt(os.path.join(results_dir, 'lev_generated_params.txt'), lev_params)

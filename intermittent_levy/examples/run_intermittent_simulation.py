@@ -29,6 +29,12 @@ int_fit_list_mom4 = []
 gen_dx4_log_list = []
 gen_dx2_log_list = []
 
+# Collect lists for plotting at the end
+all_dx2_log = []
+all_dx4_log = []
+all_int_fit_2 = []
+all_int_fit_4 = []
+
 # Begin simulation loop
 for itera in range(Nr_iterations):
     print(f"Iteration {itera + 1}/{Nr_iterations}")
@@ -74,6 +80,8 @@ for itera in range(Nr_iterations):
 
     dx2_log = np.log(dx2)
     dx4_log = np.log(dx4)
+    all_dx2_log.append(dx2_log)
+    all_dx4_log.append(dx4_log)
 
     # Classification
     dS = np.sqrt(np.diff(xsynth)**2 + np.diff(ysynth)**2)
@@ -113,6 +121,8 @@ for itera in range(Nr_iterations):
     # Compute fitted moments
     int_fit_2 = mom2_serg_log(tau_list, *best_params)
     int_fit_4 = mom4_serg_log(tau_list, *best_params)
+    all_int_fit_2.append(int_fit_2)
+    all_int_fit_4.append(int_fit_4)
 
     # Calculate adjusted R-squared
     r2_mom2 = adjusted_r_square(dx2_log, int_fit_2, degrees_freedom=4)
@@ -124,29 +134,44 @@ for itera in range(Nr_iterations):
     gen_dx4_log_list.append(dx4_log)
     gen_dx2_log_list.append(dx2_log)
 
-    # Plot the results
-    plt.figure(figsize=(10, 5))
-    plt.subplot(1, 2, 1)
-    plt.plot(np.log(tau_list), dx2_log, 'o', label='Empirical log M2')
-    plt.plot(np.log(tau_list), int_fit_2, '-', label='Fitted log M2')
-    plt.xlabel('log(tau)')
-    plt.ylabel('log M2')
-    plt.legend()
+# Convert lists to arrays for easy averaging
+all_dx2_log = np.array(all_dx2_log)
+all_dx4_log = np.array(all_dx4_log)
+all_int_fit_2 = np.array(all_int_fit_2)
+all_int_fit_4 = np.array(all_int_fit_4)
 
-    plt.subplot(1, 2, 2)
-    plt.plot(np.log(tau_list), dx4_log, 'o', label='Empirical log M4')
-    plt.plot(np.log(tau_list), int_fit_4, '-', label='Fitted log M4')
-    plt.xlabel('log(tau)')
-    plt.ylabel('log M4')
-    plt.legend()
+# Calculate the average across all iterations
+avg_dx2_log = np.mean(all_dx2_log, axis=0)
+avg_dx4_log = np.mean(all_dx4_log, axis=0)
+avg_int_fit_2 = np.mean(all_int_fit_2, axis=0)
+avg_int_fit_4 = np.mean(all_int_fit_4, axis=0)
 
-    plt.tight_layout()
-    plt.show()
+# Plot the average results
+plt.figure(figsize=(10, 5))
 
-    np.savetxt(os.path.join(results_dir, 'int_generated_params.txt'), int_params)
-    np.savetxt(os.path.join(results_dir, 'int_generated_r_squared_int.txt'), r_squared_int)
-    np.savetxt(os.path.join(results_dir, 'int_generated_opt_list_int_params.txt'), opt_list_int_params)
-    np.savetxt(os.path.join(results_dir, 'int_generated_int_fit_list_mom2.txt'), int_fit_list_mom2)
-    np.savetxt(os.path.join(results_dir, 'int_generated_int_fit_list_mom4.txt'), int_fit_list_mom4)
-    np.savetxt(os.path.join(results_dir, 'int_generated_logdx2_list.txt'), gen_dx2_log_list)
-    np.savetxt(os.path.join(results_dir, 'int_generated_logdx4_list.txt'), gen_dx4_log_list)
+# Plotting average empirical log M2 and average fitted log M2
+plt.subplot(1, 2, 1)
+plt.plot(np.log(tau_list), avg_dx2_log, 'o', label='Average Empirical log M2')
+plt.plot(np.log(tau_list), avg_int_fit_2, '-', label='Average Fitted log M2')
+plt.xlabel('log(tau)')
+plt.ylabel('log M2')
+plt.legend()
+
+# Plotting average empirical log M4 and average fitted log M4
+plt.subplot(1, 2, 2)
+plt.plot(np.log(tau_list), avg_dx4_log, 'o', label='Average Empirical log M4')
+plt.plot(np.log(tau_list), avg_int_fit_4, '-', label='Average Fitted log M4')
+plt.xlabel('log(tau)')
+plt.ylabel('log M4')
+plt.legend()
+
+plt.tight_layout()
+plt.show()
+# Saving the results
+np.savetxt(os.path.join(results_dir, 'int_generated_params.txt'), int_params)
+np.savetxt(os.path.join(results_dir, 'int_generated_r_squared_int.txt'), r_squared_int)
+np.savetxt(os.path.join(results_dir, 'int_generated_opt_list_int_params.txt'), opt_list_int_params)
+np.savetxt(os.path.join(results_dir, 'int_generated_int_fit_list_mom2.txt'), int_fit_list_mom2)
+np.savetxt(os.path.join(results_dir, 'int_generated_int_fit_list_mom4.txt'), int_fit_list_mom4)
+np.savetxt(os.path.join(results_dir, 'int_generated_logdx2_list.txt'), gen_dx2_log_list)
+np.savetxt(os.path.join(results_dir, 'int_generated_logdx4_list.txt'), gen_dx4_log_list)
