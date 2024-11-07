@@ -1,7 +1,7 @@
 
 # Intermittent Lévy Processes Package
 
-![model](Intermittent_and_LevyWalk/intermittent_levy/examples/results/IntLevy.jpg)
+![model](intermittent_levy/examples/results/IntLevy.jpg)
 
 **Version:** 0.1
 
