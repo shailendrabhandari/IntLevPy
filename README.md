@@ -1,8 +1,6 @@
 
 # Intermittent Lévy Processes Package
 
-![model](intermittent_levy/examples/results/IntLevy.jpg)
-
 **Version:** 0.1
 
 ## Overview
@@ -70,6 +68,7 @@ An example script is provided in the `examples/` directory as `run_levy_simulati
 ```bash
 python examples/run_levy_simulation.py
 ```
+![model](intermittent_levy/examples/results/IntLevy.jpg)
 
 #### Script Overview
 
