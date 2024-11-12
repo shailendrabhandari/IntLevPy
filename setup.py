@@ -1,8 +1,3 @@
-from setuptools import setup, find_packages
-
-with open("README.md", "r") as fh:
-    long_description = fh.read()
-
 setup(
     name="intermittent_levy",
     version="0.1",
@@ -10,7 +5,7 @@ setup(
     author_email="shailendra.bhandari@oslomet.no",
     description="A Python toolkit for simulating intermittent processes and Levy flights.",
     long_description=long_description,
-    long_description_content_type="text/x-rst",  # Add this line
+    long_description_content_type="text/markdown",  # Set to "text/markdown"
     url="https://github.com/shailendrabhandari/IntLevy-Processes",
     packages=find_packages(),
     classifiers=[
