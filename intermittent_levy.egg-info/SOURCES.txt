@@ -10,7 +10,6 @@ intermittent_levy/utils.py
 intermittent_levy.egg-info/PKG-INFO
 intermittent_levy.egg-info/SOURCES.txt
 intermittent_levy.egg-info/dependency_links.txt
-intermittent_levy.egg-info/requires.txt
 intermittent_levy.egg-info/top_level.txt
 intermittent_levy/tests/__init__.py
 intermittent_levy/tests/test_classification.py
