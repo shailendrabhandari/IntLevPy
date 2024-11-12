@@ -1,6 +1,3 @@
-Certainly! Here’s a very concise and error-free version of your README that maintains the essential information:
-
-```markdown
 # Intermittent Lévy Processes
 
 **Version**: 0.1
