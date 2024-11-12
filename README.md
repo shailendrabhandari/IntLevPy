@@ -80,55 +80,8 @@ The script performs the following steps:
 4. **Stores** the optimized parameters and R-squared values for analysis.
 5. **Plots** the empirical and fitted moments for the first few iterations.
 
-### Results Directory
 
-Both scripts save their results into a dedicated `results/` directory with subdirectories for each process type:
 
-```
-results/
-├── intermittent/
-│   ├── int_generated_params.txt
-│   ├── int_generated_r_squared_int.txt
-│   ├── int_generated_opt_list_int_params.txt
-│   ├── int_generated_int_fit_list_mom2.txt
-│   ├── int_generated_int_fit_list_mom4.txt
-│   ├── int_generated_logdx2_list.txt
-│   └── int_generated_logdx4_list.txt
-└── levy/
-    ├── lev_generated_params.txt
-    ├── lev_generated_r_squared_lev.txt
-    ├── lev_generated_opt_list_lev_params.txt
-    ├── lev_generated_lev_fit_list_mom2.txt
-    ├── lev_generated_lev_fit_list_mom4.txt
-    ├── lev_generated_logdx2_list.txt
-    └── lev_generated_logdx4_list.txt
-```
-
-## Package Structure
-
-The package is organized into the following modules and subpackages:
-
-```
-intermittent_levy/
-├── __init__.py
-├── processes.py          # Simulation of intermittent and Lévy processes
-├── moments.py            # Calculation of statistical moments
-├── optimization.py       # Optimization routines for parameter estimation
-├── classification.py     # Classification methods for process analysis
-├── utils.py              # Utility functions for data processing
-├── examples/
-│   ├── run_simulation.py          # Example script for intermittent processes
-│   └── run_levy_simulation.py     # Example script for Lévy processes
-├── tests/                # Unit tests for the package
-│   ├── __init__.py
-│   ├── test_processes.py
-│   ├── test_moments.py
-│   ├── test_optimization.py
-│   ├── test_classification.py
-│   └── test_utils.py
-├── setup.py              # Installation script
-└── README.md             # Package documentation
-```
 
 ### Module Descriptions
 
