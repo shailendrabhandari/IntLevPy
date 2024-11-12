@@ -1,26 +1,22 @@
-# setup.py
-
 from setuptools import setup, find_packages
 
-setup(
-    name='intermittent_levy',
-    version='0.1',
-    description='Package for classifying intermittent and Lévy processes',
-    author='Shailendra Bhandari & Pedro Lencastre',
-    author_email='shailendra.bhandari@oslomet.no',
-    packages=find_packages(),
-    install_requires=[
-        'numpy',
-        'scipy',
-        'matplotlib',
-        'pandas',
-        'seaborn',
-        'pomegranate',
-        # Add other dependencies as needed
-    ],
-    classifiers=[
-        'Programming Language :: Python :: 3',
-        'Operating System :: OS Independent',
-    ],
-)
+with open("README.rst", "r") as fh:
+    long_description = fh.read()
 
+setup(
+    name="intermittent_levy",
+    version="0.1",
+    author="Shailendra Bhandari",
+    author_email="shailendra.bhandari@oslomet.no",
+    description="A Python toolkit for simulating intermittent processes and Levy flights.",
+    long_description=long_description,
+    long_description_content_type="text/x-rst",  # Add this line
+    url="https://github.com/shailendrabhandari/IntLevy-Processes",
+    packages=find_packages(),
+    classifiers=[
+        "Programming Language :: Python :: 3",
+        "License :: OSI Approved :: MIT License",
+        "Operating System :: OS Independent",
+    ],
+    python_requires='>=3.6',
+)
