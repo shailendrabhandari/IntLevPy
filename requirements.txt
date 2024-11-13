@@ -5,4 +5,5 @@ pandas
 seaborn
 scikit-learn
 pomegranate
-
+Sphinx
+sphinx-rtd-theme
