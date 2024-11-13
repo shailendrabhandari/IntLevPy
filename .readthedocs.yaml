@@ -5,8 +5,12 @@ build:
   tools:
     python: "3.10"
   commands:
+    - echo "Installing dependencies from requirements.txt..."
     - pip install -r requirements.txt
-    - sphinx-build -b html docs/ _build/html  # Explicit command to build docs
+    - echo "Installing the package itself..."
+    - pip install .
+    - echo "Building HTML documentation with sphinx-build..."
+    - sphinx-build -b html docs/ _build/html
 
 python:
   install:
@@ -14,4 +18,4 @@ python:
     
 # Build documentation in the docs/ directory with Sphinx
 sphinx:
-  configuration: intermittent_levy/conf.py
+  configuration: docs/conf.py
