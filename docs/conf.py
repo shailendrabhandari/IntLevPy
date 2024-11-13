@@ -1,6 +1,5 @@
 # Configuration file for the Sphinx documentation builder.
-# For the full list of built-in configuration values, see:
-# https://www.sphinx-doc.org/en/master/usage/configuration.html
+# Full list of built-in configuration values: https://www.sphinx-doc.org/en/master/usage/configuration.html
 
 import os
 import sys
@@ -42,7 +41,7 @@ keep_warnings = True  # Show warnings as system messages in output
 
 # -- Options for HTML output -------------------------------------------------
 html_theme = "sphinx_rtd_theme"
-html_static_path = ["_static"]  # Add paths for static files like CSS
+html_static_path = []  # Path for static files (e.g., CSS)
 
 # -- Options for HTML Help output --------------------------------------------
 htmlhelp_basename = "IntLevyProcessesDoc"  # Base name for HTML help builder
@@ -59,4 +58,3 @@ epub_exclude_files = ["search.html"]
 intersphinx_mapping = {
     "python": ("https://docs.python.org/3", None)
 }
-
