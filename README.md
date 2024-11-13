@@ -43,4 +43,3 @@ Licensed under the [MIT License](https://github.com/shailendrabhandari/IntLevy-P
 
 ## Contact
 - **Shailendra Bhandari** - shailendra.bhandari@oslomet.no
-- **Pedro Lencastre** - pedroreg@oslomet.no
