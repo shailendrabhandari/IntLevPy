@@ -6,7 +6,7 @@ with open("README.md", "r") as readme_file, open("AUTHORS.rst", "r") as authors_
 
 setup(
     name="intermittent_levy",
-    version="v0.3",
+    version="0.3",
     author="Shailendra Bhandari",
     author_email="shailendra.bhandari@oslomet.no",
     description="A Python toolkit for simulating intermittent processes and Levy flights.",
