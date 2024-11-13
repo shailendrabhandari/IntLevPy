@@ -15,10 +15,12 @@ Contents:
 
    introduction
    installation
+   get_started
    usage
    features
    faq
-   get_started
+   authors
+   
 
 
 Project Overview
