@@ -1,4 +1,4 @@
-version: 2
+version: 0.2
 
 build:
   os: ubuntu-20.04
@@ -6,8 +6,7 @@ build:
     python: "3.8"
   commands:
     - pip install -r requirements.txt
-    - pip install .
-    - make html  # Or specify another build command if using Sphinx, MkDocs, etc.
+    - sphinx-build -b html docs/ _build/html  # Explicit command to build docs
 
 python:
   install:
