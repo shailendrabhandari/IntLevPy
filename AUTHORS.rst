@@ -18,8 +18,6 @@ The following individuals form the core development team:
 Contributors
 ------------
 
-We would like to acknowledge the contributions from:
-
 - **Pedro Lencastre** (`pedroreg@oslomet.no <mailto:pedroreg@oslomet.no>`_)
 
 Citing IntLevy-Processes
