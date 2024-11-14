@@ -181,8 +181,6 @@ This project is licensed under the [MIT License](https://github.com/shailendrabh
 
 ## Contact
 
-**Authors:**
-
 - **Shailendra Bhandari**
   - **Email:** shailendra.bhandari@oslomet.no
 - **Pedro Lencastre**
