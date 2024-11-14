@@ -10,74 +10,119 @@ The IntLevy-Processes package offers a variety of features for simulating, analy
 - Generate synthetic intermittent and Lévy trajectories.
 - Simulate realistic intermittent processes using various statistical distributions.
 
-+--------------------------+------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------+
-| Function                 | Description                                                                              | Parameters                                                                                                                                                                   | Returns                                           |
-+==========================+==========================================================================================+==============================================================================================================================================================================+===================================================+
-| `intermittent3`          | Simulates an intermittent 2D random walk with switching regimes (diffusion and ballistic motion). | - `nt` (int): Number of time steps. <br> - `dt` (float): Time interval between steps. <br> - `mean_bal_sac` (float): Mean velocity for ballistic regime. <br> - `diffusion` (float): Diffusion coefficient. <br> - `rate21` (float): Transition rate from ballistic to diffusive. <br> - `rate12` (float): Transition rate from diffusive to ballistic. | `(x, y)` tuple of arrays with the x and y coordinates over time. |
-+--------------------------+------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------+
-| `wait_times`             | Generates waiting times following a power-law distribution for Lévy processes.           | - `taui` (float): Scaling factor for waiting times. <br> - `lN` (int): Number of samples. <br> - `lalpha` (float): Lévy distribution exponent (1 < lalpha < 3).            | Array of generated waiting times.                |
-+--------------------------+------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------+
-| `levy_flight_2D_Simplified` | Simulates a 2D Lévy flight using specified parameters.                    | - `n_redirections` (int): Number of redirection steps. <br> - `n_max` (int): Maximum number of measurement points. <br> - `alpha` (float): Lévy distribution exponent (1 < alpha < 3). <br> - `tmin` (float): Minimum flight time. <br> - `v_mean` (float): Mean velocity. <br> - `measuring_dt` (float): Time interval for measurements. | `(x_measured, y_measured)` tuple of arrays with the x and y positions at measurement times. |
-+--------------------------+------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------+
+**Functions:**
+
+1. **`intermittent3`**  
+   - **Description**: Simulates an intermittent 2D random walk with switching regimes (diffusion and ballistic motion).
+   - **Parameters**:
+     - `nt` (int): Number of time steps.
+     - `dt` (float): Time interval between steps.
+     - `mean_bal_sac` (float): Mean velocity for ballistic regime.
+     - `diffusion` (float): Diffusion coefficient.
+     - `rate21` (float): Transition rate from ballistic to diffusive.
+     - `rate12` (float): Transition rate from diffusive to ballistic.
+   - **Returns**: `(x, y)` tuple of arrays with the x and y coordinates over time.
+
+2. **`wait_times`**  
+   - **Description**: Generates waiting times following a power-law distribution for Lévy processes.
+   - **Parameters**:
+     - `taui` (float): Scaling factor for waiting times.
+     - `lN` (int): Number of samples.
+     - `lalpha` (float): Lévy distribution exponent (1 < lalpha < 3).
+   - **Returns**: Array of generated waiting times.
+
+3. **`levy_flight_2D_Simplified`**  
+   - **Description**: Simulates a 2D Lévy flight using specified parameters.
+   - **Parameters**:
+     - `n_redirections` (int): Number of redirection steps.
+     - `n_max` (int): Maximum number of measurement points.
+     - `alpha` (float): Lévy distribution exponent (1 < alpha < 3).
+     - `tmin` (float): Minimum flight time.
+     - `v_mean` (float): Mean velocity.
+     - `measuring_dt` (float): Time interval for measurements.
+   - **Returns**: `(x_measured, y_measured)` tuple of arrays with the x and y positions at measurement times.
 
 ### Moments Calculation
 
 - Calculate theoretical and empirical second and fourth moments.
 - Allows for detailed statistical analysis of trajectories.
 
-+--------------------------+-----------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------+
-| Function                 | Description                                                                             | Parameters                                                                                                                                                                | Returns                                           |
-+==========================+=========================================================================================+===========================================================================================================================================================================+===================================================+
-| `mom4_serg_log`          | Calculates the theoretical logarithm of the 4th moment for intermittent search processes. | - `t` (array-like): Time lags. <br> - `v0` (float): Mean velocity. <br> - `D` (float): Diffusion coefficient. <br> - `lambdaB` (float): Transition rate to ballistic regime. <br> - `lambdaD` (float): Transition rate to diffusive regime. | Array of the logarithm of the 4th moment values. |
-+--------------------------+-----------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------+
-| `mom2_serg_log`          | Calculates the theoretical logarithm of the 2nd moment for intermittent search processes. | - `tau` (array-like): Time lags. <br> - `v` (float): Mean velocity. <br> - `D` (float): Diffusion coefficient. <br> - `lambdaB` (float): Transition rate to ballistic regime. <br> - `lambdaD` (float): Transition rate to diffusive regime. | Array of the logarithm of the 2nd moment values. |
-+--------------------------+-----------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------+
-| `theor_levy_moment`      | Calculates the theoretical nth moment for Lévy flights (not in log form).              | - `n_mom` (int): The order of the moment (e.g., 2 or 4). <br> - `alpha` (float): Lévy distribution exponent (1 < alpha < 3). <br> - `v` (float): Mean velocity. <br> - `t` (array-like): Time lags. <br> - `tmin` (float): Minimum flight time. | Array of nth moment values.                      |
-+--------------------------+-----------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------+
-| `levy_moments_log`       | Calculates the theoretical logarithm of the nth moment for Lévy flights.               | - `n_mom` (int): The order of the moment (e.g., 2 or 4). <br> - `alpha` (float): Lévy distribution exponent (1 < alpha < 3). <br> - `v_mean` (float): Mean velocity. <br> - `t_list` (array-like): List of time lags. <br> - `tmin` (float): Minimum flight time. | Array of the logarithm of nth moment values.    |
-+--------------------------+-----------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------+
+**Functions:**
+
+1. **`mom4_serg_log`**  
+   - **Description**: Calculates the theoretical logarithm of the 4th moment for intermittent search processes.
+   - **Parameters**:
+     - `t` (array-like): Time lags.
+     - `v0` (float): Mean velocity.
+     - `D` (float): Diffusion coefficient.
+     - `lambdaB` (float): Transition rate to ballistic regime.
+     - `lambdaD` (float): Transition rate to diffusive regime.
+   - **Returns**: Array of the logarithm of the 4th moment values.
+
+2. **`mom2_serg_log`**  
+   - **Description**: Calculates the theoretical logarithm of the 2nd moment for intermittent search processes.
+   - **Parameters**:
+     - `tau` (array-like): Time lags.
+     - `v` (float): Mean velocity.
+     - `D` (float): Diffusion coefficient.
+     - `lambdaB` (float): Transition rate to ballistic regime.
+     - `lambdaD` (float): Transition rate to diffusive regime.
+   - **Returns**: Array of the logarithm of the 2nd moment values.
 
 ### Optimization for Model Fitting
 
 - Provides optimization routines to fit model parameters to empirical data.
 - Enables accurate parameter estimation for intermittent and Lévy models.
 
-+-------------------------------+-----------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------+
-| Function                      | Description                                                                             | Parameters                                                                                                                                                                     | Returns                                                               |
-+===============================+=========================================================================================+================================================================================================================================================================================+=======================================================================+
-| `to_optimize_mom4_serg_log`   | Objective function to optimize parameters for the 4th moment in intermittent search processes. | - `variables` (list): `[v0, D, lambdaB, lambdaD]` values for velocity, diffusion, and transition rates. <br> - `tau_list` (array-like): List of time lags. <br> - `logdx4` (array-like): Empirical 4th moment data (log scale). | Mean squared error between empirical and theoretical log 4th moments. |
-+-------------------------------+-----------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------+
-| `to_optimize_mom2_serg_log`   | Objective function to optimize parameters for the 2nd moment in intermittent search processes. | - `variables` (list): `[v0, D, lambdaB, lambdaD]` values for velocity, diffusion, and transition rates. <br> - `tau_list` (array-like): List of time lags. <br> - `logdx2` (array-like): Empirical 2nd moment data (log scale). | Mean squared error between empirical and theoretical log 2nd moments. |
-+-------------------------------+-----------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------+
-| `to_optimize_mom4_and_2_serg_log` | Objective function to optimize both 2nd and 4th moments simultaneously for intermittent search processes. | - `variables` (list): `[v0, D, lambdaB, lambdaD]` values for velocity, diffusion, and transition rates. <br> - `tau_list` (array-like): List of time lags. <br> - `logdx2` (array-like): Empirical 2nd moment data (log scale). <br> - `logdx4` (array-like): Empirical 4th moment data (log scale). | Combined mean squared error for both moments. |
-+-------------------------------+-----------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------+
-| `to_optimize_mom4_serg_log_vl` | Optimization function for the 4th moment, with fixed values for `D` and `lambdaD`.     | - `variables` (list): `[v0, lambdaB]` values for velocity and transition rate to ballistic regime. <br> - `tau_list` (array-like): List of time lags. <br> - `logdx4` (array-like): Empirical 4th moment data (log scale). <br> - `tos_D` (float): Fixed diffusion coefficient. <br> - `tos_lambdaD` (float): Fixed transition rate to diffusive regime. | Mean absolute error relative to empirical 4th moment values. |
-+-------------------------------+-----------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------+
-| `to_optimize_second_ll`       | Optimization function for the 2nd moment, with fixed values for velocity and diffusion.  | - `variables` (list): `[lambdaB, lambdaD]` transition rates to ballistic and diffusive regimes. <br> - `tau_list` (array-like): List of time lags. <br> - `logdx2` (array-like): Empirical 2nd moment data (log scale). <br> - `tos_v` (float): Fixed velocity value. <br> - `tos_D` (float): Fixed diffusion coefficient. | Mean absolute error relative to empirical 2nd moment values. |
-+-------------------------------+-----------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------+
-| `to_optimize_levy`            | Objective function to optimize 'alpha' and 'v_mean' parameters for Lévy flights.        | - `params` (list): `[alpha, v_mean]` values for Lévy exponent and mean velocity. <br> - `t_list` (array-like): List of time lags. <br> - `dx2_log` (array-like): Empirical log 2nd moments. <br> - `dx4_log` (array-like): Empirical log 4th moments. <br> - `tmin` (float): Minimum flight time. | Mean squared error between empirical and theoretical moments for Lévy flights. |
-+-------------------------------+-----------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------+
+**Functions:**
+
+1. **`to_optimize_mom4_serg_log`**  
+   - **Description**: Objective function to optimize parameters for the 4th moment in intermittent search processes.
+   - **Parameters**:
+     - `variables` (list): `[v0, D, lambdaB, lambdaD]` values for velocity, diffusion, and transition rates.
+     - `tau_list` (array-like): List of time lags.
+     - `logdx4` (array-like): Empirical 4th moment data (log scale).
+   - **Returns**: Mean squared error between empirical and theoretical log 4th moments.
+
+2. **`to_optimize_mom2_serg_log`**  
+   - **Description**: Objective function to optimize parameters for the 2nd moment in intermittent search processes.
+   - **Parameters**:
+     - `variables` (list): `[v0, D, lambdaB, lambdaD]` values for velocity, diffusion, and transition rates.
+     - `tau_list` (array-like): List of time lags.
+     - `logdx2` (array-like): Empirical 2nd moment data (log scale).
+   - **Returns**: Mean squared error between empirical and theoretical log 2nd moments.
 
 ### Classification
 
 - Classify processes as intermittent or Lévy based on statistical properties.
 - Uses threshold-based and Fisher’s exact test-based classifications.
 
-+--------------------------+-----------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------+
-| Function                 | Description                                                                             | Parameters                                                                                                                                                                                         | Returns                                                                      |
-+==========================+=========================================================================================+====================================================================================================================================================================================================+==============================================================================+
-| `real_k_and_fisher`      | Calculates frequency matrix and detection metrics for a binary sequence, with Fisher’s exact test for correlation. | - `binary_vector` (array-like): Sequence of binary values (0s and 1s).                                                                                     | Tuple containing the frequency matrix, detection values, and log of Fisher exact test values. |
-+--------------------------+-----------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------+
-| `frequency_matrix_2D`    | Creates a 2D frequency matrix based on a threshold, optionally normalizing by row sums.  | - `d__ss` (array-like): Input data sequence. <br> - `threshold` (float): Threshold to create binary vector from data. <br> - `normalized` (bool): Whether to normalize by row sums. | 2x2 frequency matrix. |
-+--------------------------+-----------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------+
-| `form_groups`            | Calculates detection and Fisher test metrics across multiple thresholds, with optional plotting. | - `vector` (array-like): Input data sequence. <br> - `threshold_array` (array-like): Array of thresholds to evaluate. <br> - `graph` (bool): If `True`, plots detection metrics. <br> - `x_label` (str): X-axis label for plot. <br> - `title` (str): Title for plot. <br> - `x_axis_format` (str): Format for x-axis labels. | Tuple of lists for detection metrics, Fisher metrics, and minimum values of detection and Fisher test results. |
-+--------------------------+-----------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------+
-| `parse_trials`           | Parses a list of parameters using log-transformed threshold ratios and returns the optimal parameter set. | - `lparams_list` (list of arrays): List of parameters for each trial. <br> - `threshold_ratio` (float): Ratio for log thresholding.                        | Optimal set of parameters based on minimum calculated distance.              |
-+--------------------------+-----------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------+
+**Functions:**
 
-### Utilities for Data Processing
+1. **`real_k_and_fisher`**  
+   - **Description**: Calculates frequency matrix and detection metrics for a binary sequence, with Fisher’s exact test for correlation.
+   - **Parameters**:
+     - `binary_vector` (array-like): Sequence of binary values (0s and 1s).
+   - **Returns**: Tuple containing the frequency matrix, detection values, and log of Fisher exact test values.
 
-- Common functions for handling and processing data.
-- Includes utilities for data transformation, statistical calculations, and moment calculations.
+2. **`frequency_matrix_2D`**  
+   - **Description**: Creates a 2D frequency matrix based on a threshold, optionally normalizing by row sums.
+   - **Parameters**:
+     - `d__ss` (array-like): Input data sequence.
+     - `threshold` (float): Threshold to create binary vector from data.
+     - `normalized` (bool): Whether to normalize by row sums.
+   - **Returns**: 2x2 frequency matrix.
+
+3. **`form_groups`**  
+   - **Description**: Calculates detection and Fisher test metrics across multiple thresholds, with optional plotting.
+   - **Parameters**:
+     - `vector` (array-like): Input data sequence.
+     - `threshold_array` (array-like): Array of thresholds to evaluate.
+     - `graph` (bool): If `True`, plots detection metrics.
+     - `x_label` (str): X-axis label for plot.
+     - `title` (str): Title for plot.
+     - `x_axis_format` (str): Format for x-axis labels.
+   - **Returns**: Tuple of lists for detection metrics, Fisher metrics, and minimum values of detection and Fisher test results.
+
 
 For more detailed usage examples, please see the Usage section or check out the example scripts in the `examples/` directory.
