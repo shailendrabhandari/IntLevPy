@@ -6,6 +6,7 @@
 [![GitHub watchers](https://img.shields.io/github/watchers/shailendrabhandari/IntLevy-Processes?style=social)](https://github.com/shailendrabhandari/IntLevy-Processes/watchers)
 [![GitHub stars](https://img.shields.io/github/stars/shailendrabhandari/IntLevy-Processes?style=social)](https://github.com/shailendrabhandari/IntLevy-Processes/stargazers)
 
+![model](https://raw.githubusercontent.com/shailendrabhandari/IntLevy-Processes/main/intermittent_levy/examples/results/IntLevy.jpg)
 
 
 # Intermittent Lévy Processes Package
@@ -74,8 +75,6 @@ An example script is provided in the `examples/` directory as `run_levy_simulati
 ```bash
 python examples/run_levy_simulation.py
 ```
-![model](https://raw.githubusercontent.com/shailendrabhandari/IntLevy-Processes/main/intermittent_levy/examples/results/IntLevy.jpg)
-
 
 #### Script Overview
 
