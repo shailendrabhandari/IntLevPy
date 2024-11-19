@@ -6,16 +6,18 @@
 [![GitHub watchers](https://img.shields.io/github/watchers/shailendrabhandari/IntLevy-Processes?style=social)](https://github.com/shailendrabhandari/IntLevy-Processes/watchers)
 [![GitHub stars](https://img.shields.io/github/stars/shailendrabhandari/IntLevy-Processes?style=social)](https://github.com/shailendrabhandari/IntLevy-Processes/stargazers)
 
+# Intermittent Lévy Processes Package
+
+
 ![model](https://raw.githubusercontent.com/shailendrabhandari/IntLevy-Processes/main/intermittent_levy/examples/results/IntLevy.jpg)
 
 
-# Intermittent Lévy Processes Package
 ## Overview
 
 The **intermittent_levy** package provides tools for simulating and analyzing intermittent and Lévy processes. It includes functions for:
 
 - **Process Simulation:** Generate synthetic intermittent and Lévy flight trajectories.
-- **Statistical Moments:** Calculate theoretical and empirical moments of trajectories.
+- **Moments calculation:** Calculate theoretical and empirical moments of trajectories.
 - **Optimization:** Fit model parameters to empirical data using optimization techniques.
 - **Classification:** Distinguish between intermittent and Lévy processes using statistical methods.
 - **Utilities:** Common functions for data analysis and processing.
