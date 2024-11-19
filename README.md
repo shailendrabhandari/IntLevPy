@@ -70,7 +70,7 @@ An example script is provided in the `examples/` directory as `run_levy_simulati
 ```bash
 python examples/run_levy_simulation.py
 ```
-![model](https://github.com/raw.githubusercontent.com/shailendrabhandari/IntLevy-Processes/blob/main/intermittent_levy/examples/results/IntLevy.jpg)
+![model](https://raw.githubusercontent.com/shailendrabhandari/IntLevy-Processes/blob/main/intermittent_levy/examples/results/IntLevy.jpg)
 
 #### Script Overview
 
