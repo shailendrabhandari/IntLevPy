@@ -1,4 +1,3 @@
-AUTHORS.rst
 LICENSE
 README.md
 setup.py

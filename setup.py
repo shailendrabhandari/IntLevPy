@@ -1,12 +1,18 @@
 from setuptools import setup, find_packages
 
-# Combine README.md and AUTHORS.rst for the long description
-with open("README.md", "r") as readme_file, open("AUTHORS.rst", "r") as authors_file:
-    long_description = readme_file.read() + "\n\n" + authors_file.read()
+with open("README.md", "r") as readme_file:
+    long_description = readme_file.read()
+try:
+    with open("authors.rst", "r") as authors_file:
+        long_description += "\n\n" + authors_file.read()
+except FileNotFoundError:
+    # Optional: Add a warning or log message here
+    long_description += "\n\nNo AUTHORS information provided."
+
 
 setup(
     name="intermittent_levy",
-    version="0.3",
+    version="0.4",
     author="Shailendra Bhandari",
     author_email="shailendra.bhandari@oslomet.no",
     description="A Python toolkit for simulating intermittent processes and Levy flights.",

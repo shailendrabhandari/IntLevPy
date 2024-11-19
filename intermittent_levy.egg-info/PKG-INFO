@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: intermittent_levy
-Version: 0.3
+Version: 0.4
 Summary: A Python toolkit for simulating intermittent processes and Levy flights.
 Home-page: https://github.com/shailendrabhandari/IntLevy-Processes
 Author: Shailendra Bhandari
@@ -11,13 +11,12 @@ Classifier: Operating System :: OS Independent
 Requires-Python: >=3.6
 Description-Content-Type: text/markdown
 License-File: LICENSE
-License-File: AUTHORS.rst
 
 [![Documentation Status](https://readthedocs.org/projects/intlevy-processes/badge/?version=latest)](https://intlevy-processes.readthedocs.io/en/latest/)
 [![license](https://img.shields.io/badge/License-MIT-brightgreen)](https://github.com/shailendrabhandari/IntLevy-Processes/blob/main/LICENSE)
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/intermittent-levy)](https://pypi.org/project/intermittent-levy/)
 [![PyPI](https://img.shields.io/pypi/v/intermittent-levy)](https://pypi.org/project/intermittent-levy/)
-[![Downloads](https://pepy.tech/badge/intermittent-levy)](https://pepy.tech/project/intermittent-levy)
+
 
 # Intermittent Lévy Processes Package
 ## Overview
@@ -85,7 +84,8 @@ An example script is provided in the `examples/` directory as `run_levy_simulati
 ```bash
 python examples/run_levy_simulation.py
 ```
-![model](intermittent_levy/examples/results/IntLevy.jpg)
+![model](https://raw.githubusercontent.com/shailendrabhandari/IntLevy-Processes/main/intermittent_levy/examples/results/IntLevy.jpg)
+
 
 #### Script Overview
 
@@ -196,8 +196,6 @@ This project is licensed under the [MIT License](https://github.com/shailendrabh
 
 ## Contact
 
-**Authors:**
-
 - **Shailendra Bhandari**
   - **Email:** shailendra.bhandari@oslomet.no
 - **Pedro Lencastre**
@@ -205,6 +203,7 @@ This project is licensed under the [MIT License](https://github.com/shailendrabh
 
 For any questions or inquiries, please feel free to reach out via email.
 
+.. _authors: 
 Authors
 =======
 
