@@ -2,6 +2,8 @@
 [![license](https://img.shields.io/badge/License-MIT-brightgreen)](https://github.com/shailendrabhandari/IntLevy-Processes/blob/main/LICENSE)
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/intermittent-levy)](https://pypi.org/project/intermittent-levy/)
 [![PyPI](https://img.shields.io/pypi/v/intermittent-levy)](https://pypi.org/project/intermittent-levy/)
+[![Downloads](https://pepy.tech/badge/intermittent-levy)](https://pepy.tech/project/intermittent-levy)
+
 
 
 # Intermittent Lévy Processes Package
