@@ -14,21 +14,19 @@ Contents:
    :caption: Table of Contents
 
    introduction
-   installation
    get_started
+   installation
    usage
    features
    faq
    authors
    
-
-
 Project Overview
 ================
 
 The **IntLevy-Processes** package provides a Python toolkit for:
 - Simulating synthetic trajectories for intermittent and Lévy processes.
-- Calculating theoretical and empirical statistical moments.
+- Calculating theoretical and empirical moments.
 - Fitting model parameters to empirical data.
 - Classifying process types using statistical methods.
 
