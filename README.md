@@ -3,6 +3,8 @@
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/intermittent-levy)](https://pypi.org/project/intermittent-levy/)
 [![PyPI](https://img.shields.io/pypi/v/intermittent-levy)](https://pypi.org/project/intermittent-levy/)
 [![Downloads](https://pepy.tech/badge/intermittent-levy)](https://pepy.tech/project/intermittent-levy)
+[![GitHub watchers](https://img.shields.io/github/watchers/shailendrabhandari/IntLevy-Processes?style=social)](https://github.com/shailendrabhandari/IntLevy-Processes/watchers)
+[![GitHub stars](https://img.shields.io/github/stars/shailendrabhandari/IntLevy-Processes?style=social)](https://github.com/shailendrabhandari/IntLevy-Processes/stargazers)
 
 
 
