@@ -33,6 +33,7 @@ The IntLevPy package offers a variety of features for simulating, analyzing, and
 
 3. **`levy_flight_2D_Simplified`**  
    - **Description**: Simulates a 2D Lévy flight using specified parameters.
+   
    - **Parameters**:
      - `n_redirections` (int): Number of redirection steps.
      - `n_max` (int): Maximum number of measurement points.
@@ -51,6 +52,7 @@ The IntLevPy package offers a variety of features for simulating, analyzing, and
 
 1. **`mom4_serg_log`**  
    - **Description**: Calculates the theoretical logarithm of the 4th moment for intermittent search processes.
+   
    - **Parameters**:
      - `t` (array-like): Time lags.
      - `v0` (float): Mean velocity.
@@ -61,6 +63,7 @@ The IntLevPy package offers a variety of features for simulating, analyzing, and
 
 2. **`mom2_serg_log`**  
    - **Description**: Calculates the theoretical logarithm of the 2nd moment for intermittent search processes.
+   
    - **Parameters**:
      - `tau` (array-like): Time lags.
      - `v` (float): Mean velocity.
@@ -78,6 +81,7 @@ The IntLevPy package offers a variety of features for simulating, analyzing, and
 
 1. **`to_optimize_mom4_serg_log`**  
    - **Description**: Objective function to optimize parameters for the 4th moment in intermittent search processes.
+   
    - **Parameters**:
      - `variables` (list): `[v0, D, lambdaB, lambdaD]` values for velocity, diffusion, and transition rates.
      - `tau_list` (array-like): List of time lags.
@@ -101,12 +105,14 @@ The IntLevPy package offers a variety of features for simulating, analyzing, and
 
 1. **`real_k_and_fisher`**  
    - **Description**: Calculates frequency matrix and detection metrics for a binary sequence, with Fisher’s exact test for correlation.
+   
    - **Parameters**:
      - `binary_vector` (array-like): Sequence of binary values (0s and 1s).
    - **Returns**: Tuple containing the frequency matrix, detection values, and log of Fisher exact test values.
 
 2. **`frequency_matrix_2D`**  
    - **Description**: Creates a 2D frequency matrix based on a threshold, optionally normalizing by row sums.
+   
    - **Parameters**:
      - `d__ss` (array-like): Input data sequence.
      - `threshold` (float): Threshold to create binary vector from data.
@@ -115,6 +121,7 @@ The IntLevPy package offers a variety of features for simulating, analyzing, and
 
 3. **`form_groups`**  
    - **Description**: Calculates detection and Fisher test metrics across multiple thresholds, with optional plotting.
+   
    - **Parameters**:
      - `vector` (array-like): Input data sequence.
      - `threshold_array` (array-like): Array of thresholds to evaluate.
