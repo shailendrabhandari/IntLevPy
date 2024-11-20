@@ -1,4 +1,4 @@
-[![Documentation Status](https://readthedocs.org/projects/IntLevPy/badge/?version=latest)](https://IntLevPy.readthedocs.io/en/latest/)
+[![Documentation Status](https://readthedocs.org/projects/intlevpy/badge/?version=latest)](https://intlevpy.readthedocs.io/en/latest/)
 [![license](https://img.shields.io/badge/License-MIT-brightgreen)](https://github.com/shailendrabhandari/IntLevPy/blob/main/LICENSE)
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/IntLevPy)](https://pypi.org/project/InterLevPy/)
 [![PyPI](https://img.shields.io/pypi/v/IntLevPy)](https://pypi.org/project/IntLevPy/)
