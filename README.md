@@ -33,6 +33,7 @@ git https://github.com/shailendrabhandari/IntLevPy.git
 cd IntLevPy
 pip install -e .
 ```
+Or follow instruction from ``https://pypi.org/project/IntLevPy/0.0.1/``
 
 *Note:* The `-e` flag installs the package in editable mode, allowing for modifications without reinstallation.
 
