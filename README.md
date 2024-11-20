@@ -2,7 +2,7 @@
 [![license](https://img.shields.io/badge/License-MIT-brightgreen)](https://github.com/shailendrabhandari/IntLevPy/blob/main/LICENSE)
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/IntLevPy)](https://pypi.org/project/InterLevPy/)
 [![PyPI](https://img.shields.io/pypi/v/IntLevPy)](https://pypi.org/project/IntLevPy/)
-[![Downloads](https://pepy.tech/badge/IntLevPy)](https://pepy.tech/project/IntLevPy)
+[![Downloads](https://pepy.tech/badge/intlevpy)](https://pepy.tech/project/intlevpy)
 [![GitHub watchers](https://img.shields.io/github/watchers/shailendrabhandari/IntLevPy?style=social)](https://github.com/shailendrabhandari/IntLevPy/watchers)
 [![GitHub stars](https://img.shields.io/github/stars/shailendrabhandari/IntLevPy?style=social)](https://github.com/shailendrabhandari/IntLevPy/stargazers)
 
