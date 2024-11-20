@@ -6,7 +6,7 @@ Frequently Asked Questions (FAQ)
 Below are answers to some common questions about using the IntLevPy package.
 
 1. **What is IntLevPy?**
-   - IntLevy-Processes is a Python toolkit for simulating and analyzing intermittent and Lévy processes, often used in statistical physics and complex systems research.
+   - IntLevPy is a Python toolkit for simulating and analyzing intermittent and Lévy processes, often used in statistical physics and complex systems research.
 
 2. **How do I install IntLevPy?**
    - You can install it by cloning the GitHub repository and using `pip`. Please see :ref:`get-started` for installation instructions.

@@ -25,5 +25,5 @@ Contributors
 Citing IntLevy-Processes
 ------------------------
 
-If you would like to cite **IntLevy-Processes** in your work, please refer to the citation guidelines, which will be announced soon.
+If you would like to cite **IntLevPy** in your work, please refer to the citation guidelines, which will be announced soon.
 

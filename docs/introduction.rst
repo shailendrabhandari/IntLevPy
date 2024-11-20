@@ -3,7 +3,7 @@
 Introduction
 ============
 
-The **IntLevy-Processes** package provides tools for simulating and analyzing intermittent and Lévy processes. This package is intended for researchers and practitioners working in statistical physics, complex systems, or any field where modeling and analysis of anomalous diffusion processes are relevant.
+The **IntLevPy** package provides tools for simulating and analyzing intermittent and Lévy processes. This package is intended for researchers and practitioners working in statistical physics, complex systems, or any field where modeling and analysis of anomalous diffusion processes are relevant.
 
 Key Features:
 - Process simulation for intermittent and Lévy trajectories.

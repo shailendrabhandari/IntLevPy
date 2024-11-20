@@ -13,8 +13,8 @@ To get started, clone the repository and install the package using `pip`.
 
 .. code-block:: bash
 
-   git clone https://github.com/shailendrabhandari/IntLevy-Processes.git
-   cd IntLevy-Processes
+   git clone https://github.com/shailendrabhandari/IntLevPy.git
+   cd IntLevPy
    pip install -e .
 
 This installs the package in *editable mode*, allowing you to modify the source code without reinstalling the package.
