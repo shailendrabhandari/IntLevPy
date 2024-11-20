@@ -19,7 +19,7 @@ Nr_iterations = 200  # Adjust as needed
 tau_list = np.arange(1, 20)  # Define your tau_list appropriately
 
 # Lists to store results
-int_params = []
+int_params = []n
 list_X_traj = []
 list_Y_traj = []
 r_squared_int = []
