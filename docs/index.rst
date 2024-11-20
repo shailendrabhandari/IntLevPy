@@ -1,10 +1,10 @@
-.. IntLevy-Processes documentation master file, created by
+.. IntLevPy documentation master file, created by
    sphinx-quickstart on 2024.
 
-Welcome to IntLevy-Processes Documentation
+Welcome to IntLevPy Documentation
 ==========================================
 
-This documentation provides an overview of the IntLevy-Processes package, which includes tools for simulating and analyzing intermittent and Lévy processes.
+This documentation provides an overview of the IntLevPy package, which includes tools for simulating and analyzing intermittent and Lévy processes.
 
 Contents:
 ---------
@@ -24,7 +24,7 @@ Contents:
 Project Overview
 ================
 
-The **IntLevy-Processes** package provides a Python toolkit for:
+The **IntLevPy** package provides a Python toolkit for:
 - Simulating synthetic trajectories for intermittent and Lévy processes.
 - Calculating theoretical and empirical moments.
 - Fitting model parameters to empirical data.

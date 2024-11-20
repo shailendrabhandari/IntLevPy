@@ -3,12 +3,12 @@
 Installation
 ============
 
-To install **IntLevy-Processes**, clone the repository and install the package using pip:
+To install **IntLevPy**, clone the repository and install the package using pip:
 
 .. code-block:: bash
 
-    git clone https://github.com/shailendrabhandari/IntLevy-Processes.git
-    cd IntLevy-Processes
+    git clone https://github.com/shailendrabhandari/IntLevPy.git
+    cd IntLevPy
     pip install -e .
 
 Dependencies

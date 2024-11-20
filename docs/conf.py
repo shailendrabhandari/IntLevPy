@@ -9,7 +9,7 @@ import sphinx_rtd_theme
 sys.path.insert(0, os.path.abspath(".."))
 
 # -- Project information -----------------------------------------------------
-project = "IntLevy-Processes"
+project = "IntLevPy"
 copyright = "2024, Shailendra Bhandari"
 author = "Shailendra Bhandari"
 release = "13/11/2024"  # Version or release date
@@ -44,7 +44,7 @@ html_theme = "sphinx_rtd_theme"
 html_static_path = []  # Path for static files (e.g., CSS)
 
 # -- Options for HTML Help output --------------------------------------------
-htmlhelp_basename = "IntLevyProcessesDoc"  # Base name for HTML help builder
+htmlhelp_basename = "IntLevPyDoc"  # Base name for HTML help builder
 
 # -- Options for Epub output -------------------------------------------------
 epub_title = project

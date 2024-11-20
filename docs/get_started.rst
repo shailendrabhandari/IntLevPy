@@ -4,7 +4,7 @@
 Getting Started
 ===============
 
-This guide will help you get started with installing and using IntLevy-Processes.
+This guide will help you get started with installing and using IntLevPy.
 
 Installation
 ------------

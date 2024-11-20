@@ -3,7 +3,7 @@
 Features
 ========
 
-The IntLevy-Processes package offers a variety of features for simulating, analyzing, and classifying complex stochastic processes. Key features include:
+The IntLevPy package offers a variety of features for simulating, analyzing, and classifying complex stochastic processes. Key features include:
 
 ### Process Simulation
 

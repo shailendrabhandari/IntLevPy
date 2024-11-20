@@ -3,7 +3,7 @@
 Authors
 =======
 
-This package, **IntLevy-Processes**, is being developed and maintained by `Shailendra Bhandari <https://github.com/shailendrabhandari/>`_.
+This package, **InterLevPy**, is being developed and maintained by `Shailendra Bhandari <https://github.com/shailendrabhandari/>`_.
 
 Lead Development Team
 ---------------------

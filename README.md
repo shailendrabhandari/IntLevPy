@@ -6,7 +6,7 @@
 [![GitHub watchers](https://img.shields.io/github/watchers/shailendrabhandari/IntLevy-Processes?style=social)](https://github.com/shailendrabhandari/IntLevy-Processes/watchers)
 [![GitHub stars](https://img.shields.io/github/stars/shailendrabhandari/IntLevy-Processes?style=social)](https://github.com/shailendrabhandari/IntLevy-Processes/stargazers)
 
-# Intermittent Lévy Processes Package
+# Intermittent Lévy Processes (InterLevPy) Package
 
 
 ![model](https://raw.githubusercontent.com/shailendrabhandari/IntLevy-Processes/main/intermittent_levy/examples/results/model.jpg)
@@ -14,7 +14,7 @@
 
 ## Overview
 
-The **intermittent_levy** package provides tools for simulating and analyzing intermittent and Lévy processes. It includes functions for:
+The **InterLevPy** package provides tools for simulating and analyzing intermittent and Lévy processes. It includes functions for:
 
 - **Process Simulation:** Generate synthetic intermittent and Lévy flight trajectories.
 - **Moments calculation:** Calculate theoretical and empirical moments of trajectories.
@@ -29,8 +29,8 @@ This package is intended for researchers and practitioners working in statistica
 Clone the repository and install the package using pip:
 
 ```bash
-git clone https://github.com/shailendrabhandari/IntLevy-Processes.git
-cd IntLevy-Processes
+git https://github.com/shailendrabhandari/IntLevPy.git
+cd IntLevPy
 pip install -e .
 ```
 
@@ -94,7 +94,7 @@ The script performs the following steps:
 The package is organized into the following modules and subpackages:
 
 ```
-intermittent_levy/
+IntLevPy/
 ├── __init__.py
 ├── processes.py          # Simulation of intermittent and Lévy processes
 ├── moments.py            # Calculation of statistical moments
