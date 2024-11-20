@@ -9,7 +9,7 @@
 # Intermittent Lévy Processes Package
 
 
-![model](https://raw.githubusercontent.com/shailendrabhandari/IntLevy-Processes/main/intermittent_levy/examples/results/IntLevy.jpg)
+![model](https://raw.githubusercontent.com/shailendrabhandari/IntLevy-Processes/main/intermittent_levy/examples/results/IntLevyy.jpg)
 
 
 ## Overview
