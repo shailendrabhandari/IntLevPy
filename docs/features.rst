@@ -14,7 +14,7 @@ Process Simulation
 **Functions:**
 
 1. ``intermittent3``  
-   Simulates an intermittent 2D random walk with switching regimes (diffusion and ballistic motion).
+   **Description:** Simulates an intermittent 2D random walk with switching regimes (diffusion and ballistic motion).
 
    **Parameters:**
    - ``nt`` (int): Number of time steps.
@@ -28,7 +28,7 @@ Process Simulation
    Tuple ``(x, y)``: Arrays with the x and y coordinates over time.
 
 2. ``wait_times``  
-   Generates waiting times following a power-law distribution for Lévy processes.
+   **Description:** Generates waiting times following a power-law distribution for Lévy processes.
 
    **Parameters:**
    - ``taui`` (float): Scaling factor for waiting times.
@@ -39,7 +39,7 @@ Process Simulation
    Array of generated waiting times.
 
 3. ``levy_flight_2D_Simplified``  
-   Simulates a 2D Lévy flight using specified parameters.
+   **Description:** Simulates a 2D Lévy flight using specified parameters.
 
    **Parameters:**
    - ``n_redirections`` (int): Number of redirection steps.
@@ -61,7 +61,7 @@ Moments Calculation
 **Functions:**
 
 1. ``mom4_serg_log``  
-   Calculates the theoretical logarithm of the 4th moment for intermittent search processes.
+   **Description:** Calculates the theoretical logarithm of the 4th moment for intermittent search processes.
 
    **Parameters:**
    - ``t`` (array-like): Time lags.
@@ -74,7 +74,7 @@ Moments Calculation
    Array of the logarithm of the 4th moment values.
 
 2. ``mom2_serg_log``  
-   Calculates the theoretical logarithm of the 2nd moment for intermittent search processes.
+   **Description:** Calculates the theoretical logarithm of the 2nd moment for intermittent search processes.
 
    **Parameters:**
    - ``tau`` (array-like): Time lags.
@@ -95,7 +95,7 @@ Optimization for Model Fitting
 **Functions:**
 
 1. ``to_optimize_mom4_serg_log``  
-   Objective function to optimize parameters for the 4th moment in intermittent search processes.
+   **Description:** Objective function to optimize parameters for the 4th moment in intermittent search processes.
 
    **Parameters:**
    - ``variables`` (list): ``[v0, D, lambdaB, lambdaD]`` values for velocity, diffusion, and transition rates.
@@ -106,7 +106,7 @@ Optimization for Model Fitting
    Mean squared error between empirical and theoretical log 4th moments.
 
 2. ``to_optimize_mom2_serg_log``  
-   Objective function to optimize parameters for the 2nd moment in intermittent search processes.
+   **Description:** Objective function to optimize parameters for the 2nd moment in intermittent search processes.
 
    **Parameters:**
    - ``variables`` (list): ``[v0, D, lambdaB, lambdaD]`` values for velocity, diffusion, and transition rates.
@@ -125,7 +125,7 @@ Classification
 **Functions:**
 
 1. ``real_k_and_fisher``  
-   Calculates frequency matrix and detection metrics for a binary sequence, with Fisher’s exact test for correlation.
+   **Description:** Calculates frequency matrix and detection metrics for a binary sequence, with Fisher’s exact test for correlation.
 
    **Parameters:**
    - ``binary_vector`` (array-like): Sequence of binary values (0s and 1s).
@@ -134,7 +134,7 @@ Classification
    Tuple containing the frequency matrix, detection values, and log of Fisher exact test values.
 
 2. ``frequency_matrix_2D``  
-   Creates a 2D frequency matrix based on a threshold, optionally normalizing by row sums.
+   **Description:** Creates a 2D frequency matrix based on a threshold, optionally normalizing by row sums.
 
    **Parameters:**
    - ``d__ss`` (array-like): Input data sequence.
@@ -145,7 +145,7 @@ Classification
    2x2 frequency matrix.
 
 3. ``form_groups``  
-   Calculates detection and Fisher test metrics across multiple thresholds, with optional plotting.
+   **Description:** Calculates detection and Fisher test metrics across multiple thresholds, with optional plotting.
 
    **Parameters:**
    - ``vector`` (array-like): Input data sequence.
