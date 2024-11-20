@@ -1,3 +1,17 @@
+Metadata-Version: 2.1
+Name: IntLevPy
+Version: 0.0.1
+Summary: A Python toolkit for simulating intermittent processes and Levy flights.
+Home-page: https://github.com/shailendrabhandari/IntLevy-Processes
+Author: Shailendra Bhandari
+Author-email: shailendra.bhandari@oslomet.no
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+License-File: LICENSE
+
 [![Documentation Status](https://readthedocs.org/projects/IntLevPy/badge/?version=latest)](https://IntLevPy.readthedocs.io/en/latest/)
 [![license](https://img.shields.io/badge/License-MIT-brightgreen)](https://github.com/shailendrabhandari/IntLevPy/blob/main/LICENSE)
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/IntLevPy)](https://pypi.org/project/InterLevPy/)
@@ -6,7 +20,7 @@
 [![GitHub watchers](https://img.shields.io/github/watchers/shailendrabhandari/IntLevPy?style=social)](https://github.com/shailendrabhandari/IntLevPy/watchers)
 [![GitHub stars](https://img.shields.io/github/stars/shailendrabhandari/IntLevPy?style=social)](https://github.com/shailendrabhandari/IntLevPy/stargazers)
 
-# Intermittent Lévy Processes (IntLevPy) Package
+# Intermittent Lévy Processes (InterLevPy) Package
 
 
 ![model](https://raw.githubusercontent.com/shailendrabhandari/IntLevPy/main/intermittent_levy/examples/results/model.jpg)
@@ -170,3 +184,30 @@ This project is licensed under the [MIT License](https://github.com/shailendrabh
   - **Email:** pedroreg@oslomet.no
 
 For any questions or inquiries, please feel free to reach out via email.
+
+Authors
+=======
+
+This package, **InterLevPy**, is developed and maintained by `Shailendra Bhandari <https://github.com/shailendrabhandari/>`_.
+
+Lead Development Team
+---------------------
+
+The core development team includes:
+
+- **Shailendra Bhandari** (Email: `shailendra.bhandari@oslomet.no <mailto:shailendra.bhandari@oslomet.no>`_)
+- **Pedro Lencastre** (Email: `pedroreg@oslomet.no <mailto:pedroreg@oslomet.no>`_)
+- **Sergiy Denysov** (Email: `sergiyde@oslomet.no <mailto:sergiyde@oslomet.no>`_)
+- **Anis Yazidi** (Email: `anisy@oslomet.no <mailto:anisy@oslomet.no>`_)
+- **Yuri Bystrik**
+- **Pedro G. Lind** (Email: `pedrolin@oslomet.no <mailto:pedrolin@oslomet.no>`_)
+
+Contributors
+------------
+
+- **Pedro Lencastre** (Email: `pedroreg@oslomet.no <mailto:pedroreg@oslomet.no>`_)
+
+Citing IntLevy-Processes
+------------------------
+
+If you would like to cite **IntLevy-Processes** in your work, please refer to the citation guidelines, which will be announced soon.

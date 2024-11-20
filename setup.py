@@ -11,7 +11,7 @@ except FileNotFoundError:
 
 
 setup(
-    name="InterLevPy",
+    name="IntLevPy",
     version="0.0.1",
     author="Shailendra Bhandari",
     author_email="shailendra.bhandari@oslomet.no",
