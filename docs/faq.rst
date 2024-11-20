@@ -22,6 +22,6 @@ Below are answers to some common questions about using the IntLevPy package.
 
 6. **Who can I contact for further questions?**
    - For any questions, you can reach out to the authors:
-     - Shailendra Bhandari: shailendra.bhandari@oslomet.no
-     - Pedro Lencastre: pedroreg@oslomet.no
-
+     
+     - **Shailendra Bhandari**: shailendra.bhandari@oslomet.no
+     - **Pedro Lencastre**: pedroreg@oslomet.no
