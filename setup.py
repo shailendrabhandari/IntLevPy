@@ -11,8 +11,8 @@ except FileNotFoundError:
 
 
 setup(
-    name="intermittent_levy",
-    version="0.4",
+    name="InterLevPy",
+    version="0.0.1",
     author="Shailendra Bhandari",
     author_email="shailendra.bhandari@oslomet.no",
     description="A Python toolkit for simulating intermittent processes and Levy flights.",
