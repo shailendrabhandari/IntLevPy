@@ -1,15 +1,15 @@
-[![Documentation Status](https://readthedocs.org/projects/intlevy-processes/badge/?version=latest)](https://intlevy-processes.readthedocs.io/en/latest/)
-[![license](https://img.shields.io/badge/License-MIT-brightgreen)](https://github.com/shailendrabhandari/IntLevy-Processes/blob/main/LICENSE)
-[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/intermittent-levy)](https://pypi.org/project/intermittent-levy/)
-[![PyPI](https://img.shields.io/pypi/v/intermittent-levy)](https://pypi.org/project/intermittent-levy/)
-[![Downloads](https://pepy.tech/badge/intermittent-levy)](https://pepy.tech/project/intermittent-levy)
-[![GitHub watchers](https://img.shields.io/github/watchers/shailendrabhandari/IntLevy-Processes?style=social)](https://github.com/shailendrabhandari/IntLevy-Processes/watchers)
-[![GitHub stars](https://img.shields.io/github/stars/shailendrabhandari/IntLevy-Processes?style=social)](https://github.com/shailendrabhandari/IntLevy-Processes/stargazers)
+[![Documentation Status](https://readthedocs.org/projects/IntLevPy/badge/?version=latest)](https://IntLevPy.readthedocs.io/en/latest/)
+[![license](https://img.shields.io/badge/License-MIT-brightgreen)](https://github.com/shailendrabhandari/IntLevPy/blob/main/LICENSE)
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/IntLevPy)](https://pypi.org/project/IntLevPy/)
+[![PyPI](https://img.shields.io/pypi/v/IntLevPy)](https://pypi.org/project/IntLevPy/)
+[![Downloads](https://pepy.tech/badge/IntLevPy)](https://pepy.tech/project/IntLevPy)
+[![GitHub watchers](https://img.shields.io/github/watchers/shailendrabhandari/IntLevPy?style=social)](https://github.com/shailendrabhandari/IntLevPy/watchers)
+[![GitHub stars](https://img.shields.io/github/stars/shailendrabhandari/IntLevPy?style=social)](https://github.com/shailendrabhandari/IntLevPy/stargazers)
 
 # Intermittent Lévy Processes (InterLevPy) Package
 
 
-![model](https://raw.githubusercontent.com/shailendrabhandari/IntLevy-Processes/main/intermittent_levy/examples/results/model.jpg)
+![model](https://raw.githubusercontent.com/shailendrabhandari/IntLevPy/main/intermittent_levy/examples/results/model.jpg)
 
 
 ## Overview
@@ -160,7 +160,7 @@ Please ensure your code adheres to the project's coding standards and passes all
 
 ## License
 
-This project is licensed under the [MIT License](https://github.com/shailendrabhandari/IntLevy-Processes/blob/main/LICENSE).
+This project is licensed under the [MIT License](https://github.com/shailendrabhandari/IntLevPy/blob/main/LICENSE).
 
 ## Contact
 
