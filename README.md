@@ -242,4 +242,5 @@ This package is licensed under the [MIT License](https://github.com/shailendrabh
 **PyPI Package:** [IntLevPy on PyPI](https://pypi.org/project/IntLevPy/)
 
 **Documentation:** [IntLevPy Documentation](https://intlevpy.readthedocs.io/en/latest/)
-**For a detailed list of contributors, visit:** [Contributors Page](https://intlevpy.readthedocs.io/en/latest/authors.html#contributors)."
+
+**For a detailed list of contributors, visit:** [Contributors Page](https://intlevpy.readthedocs.io/en/latest/authors.html#contributors).
