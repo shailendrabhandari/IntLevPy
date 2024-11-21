@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: IntLevPy
-Version: 0.0.2
+Version: 0.0.3
 Summary: A Python toolkit for simulating intermittent processes and Levy flights.
 Home-page: https://github.com/shailendrabhandari/IntLevy-Processes
 Author: Shailendra Bhandari
