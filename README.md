@@ -7,170 +7,238 @@
 [![GitHub Stars](https://img.shields.io/github/stars/shailendrabhandari/IntLevPy?style=social)](https://github.com/shailendrabhandari/IntLevPy/stargazers)
 
 
+# IntLevPy: Intermittent Lévy Processes Package
 
-
-# Intermittent Lévy Processes (IntLevPy) Package
-
-
-![model](https://raw.githubusercontent.com/shailendrabhandari/IntLevPy/main/intermittent_levy/examples/results/model.jpg)
-
+**IntLevPy** is a Python package for simulating and analyzing intermittent and Lévy processes. It provides tools for process simulation, moments calculation, optimization, and classification methods, making it ideal for researchers and practitioners in fields like statistical physics and complex systems.
 
 ## Overview
 
-The **InterLevPy** package provides tools for simulating and analyzing intermittent and Lévy processes. It includes functions for:
-
 - **Process Simulation:** Generate synthetic intermittent and Lévy flight trajectories.
-- **Moments calculation:** Calculate theoretical and empirical moments of trajectories.
+- **Moments Calculation:** Compute theoretical and empirical moments of trajectories.
 - **Optimization:** Fit model parameters to empirical data using optimization techniques.
-- **Classification:** Distinguish between intermittent and Lévy processes using statistical methods.
-- **Utilities:** Common functions for data analysis and processing.
+- **Classification:** Differentiate between intermittent and Lévy processes using statistical methods.
 
-This package is intended for researchers and practitioners working in statistical physics, complex systems, or any field where modeling and analysis of anomalous diffusion processes are relevant.
+For detailed documentation, visit the [IntLevPy Documentation](https://intlevpy.readthedocs.io/en/latest/).
+
+## Model
+
+![Intermittent Lévy Process Model](https://raw.githubusercontent.com/shailendrabhandari/IntLevPy/main/intermittent_levy/examples/results/model.jpg)
+
+*Figure: Schematic representation of the intermittent Lévy process model.*
 
 ## Installation
 
-Clone the repository and install the package using pip:
+Install **IntLevPy** directly from PyPI:
 
 ```bash
-git https://github.com/shailendrabhandari/IntLevPy.git
-cd IntLevPy
-pip install -e .
+pip install IntLevPy
 ```
-Or follow instruction from ``https://pypi.org/project/IntLevPy/0.0.1/``
-
-*Note:* The `-e` flag installs the package in editable mode, allowing for modifications without reinstallation.
-
-## Dependencies
-
-Install all required dependencies using:
-
-```bash
-pip install -r requirements.txt
-```
-
 
 ## Usage
 
-### Example 1: Simulating and Analyzing an Intermittent Process
+### Simulating and Analyzing an Intermittent Process
 
-An example script is provided in the `examples/` directory as `run_intermittent_simulation.py`. This script demonstrates how to simulate an intermittent process and perform parameter estimation.
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+from intermittent_levy.processes import intermittent3
+from intermittent_levy.moments import mom2_serg_log, mom4_serg_log
+from intermittent_levy.optimization import to_optimize_mom4_and_2_serg_log
+from intermittent_levy.utils import adjusted_r_square
+from scipy import optimize
 
-#### Running the Example Script
+# Simulation parameters
+N = 300000                   # Number of steps
+integration_factor = 3
+tau = 1.0 / integration_factor
+v0 = 10.0                    # Mean velocity
+D = 0.5                      # Diffusion coefficient
+lambda_B = 0.1               # Transition rate from ballistic to diffusive
+lambda_D = 0.05              # Transition rate from diffusive to ballistic
 
-```bash
-python examples/run_intermittent_simulation.py
+# Simulate intermittent process
+x_traj, y_traj = intermittent3(
+    N * integration_factor,
+    tau,
+    v0,
+    D,
+    lambda_B,
+    lambda_D
+)
+
+# Time intervals for analysis
+tau_list = np.arange(1, 100, 5)
+
+# Calculate empirical moments
+dx2 = []
+dx4 = []
+for tau_i in tau_list:
+    dx = x_traj[int(tau_i):] - x_traj[:-int(tau_i)]
+    dy = y_traj[int(tau_i):] - y_traj[:-int(tau_i)]
+    displacement = dx**2 + dy**2
+    dx2.append(np.mean(displacement))
+    dx4.append(np.mean(displacement**2))
+
+dx2_log = np.log(dx2)
+dx4_log = np.log(dx4)
+
+# Parameter estimation using optimization
+def objective_function(params, tau_list, dx2_log, dx4_log):
+    v0_opt, D_opt, lambda_B_opt, lambda_D_opt = params
+    model_dx2_log = mom2_serg_log(tau_list, v0_opt, D_opt, lambda_B_opt, lambda_D_opt)
+    model_dx4_log = mom4_serg_log(tau_list, v0_opt, D_opt, lambda_B_opt, lambda_D_opt)
+    error = np.sum((dx2_log - model_dx2_log)**2 + (dx4_log - model_dx4_log)**2)
+    return error
+
+initial_guess = [v0, D, lambda_B, lambda_D]
+bounds = [
+    (v0 * 0.5, v0 * 1.5),
+    (D * 0.5, D * 1.5),
+    (lambda_B * 0.5, lambda_B * 1.5),
+    (lambda_D * 0.5, lambda_D * 1.5)
+]
+
+result = optimize.minimize(
+    objective_function,
+    initial_guess,
+    args=(tau_list, dx2_log, dx4_log),
+    bounds=bounds
+)
+
+estimated_params = result.x
+print("Estimated Parameters:")
+print(f"v0 = {estimated_params[0]:.4f}")
+print(f"D = {estimated_params[1]:.4f}")
+print(f"lambda_B = {estimated_params[2]:.4f}")
+print(f"lambda_D = {estimated_params[3]:.4f}")
+
+# Plot empirical and fitted moments
+fitted_dx2_log = mom2_serg_log(tau_list, *estimated_params)
+fitted_dx4_log = mom4_serg_log(tau_list, *estimated_params)
+
+plt.figure(figsize=(12, 5))
+plt.subplot(1, 2, 1)
+plt.plot(np.log(tau_list), dx2_log, 'o', label='Empirical log M2')
+plt.plot(np.log(tau_list), fitted_dx2_log, '-', label='Fitted log M2')
+plt.xlabel('log(tau)')
+plt.ylabel('log(M2)')
+plt.legend()
+
+plt.subplot(1, 2, 2)
+plt.plot(np.log(tau_list), dx4_log, 'o', label='Empirical log M4')
+plt.plot(np.log(tau_list), fitted_dx4_log, '-', label='Fitted log M4')
+plt.xlabel('log(tau)')
+plt.ylabel('log(M4)')
+plt.legend()
+
+plt.tight_layout()
+plt.show()
 ```
 
-#### Script Overview
+### Simulating and Analyzing a Lévy Flight Process
 
-The script performs the following steps:
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+from intermittent_levy.processes import levy_flight_2D_Simplified
+from intermittent_levy.moments import levy_moments_log
+from intermittent_levy.optimization import to_optimize_levy
+from intermittent_levy.utils import adjusted_r_square
+from scipy import optimize
 
-1. **Simulates** an intermittent process using `intermittent3` with random parameters within specified ranges.
-2. **Calculates** the empirical second and fourth moments of the displacements.
-3. **Performs Classification** to separate different movement phases using statistical methods.
-4. **Performs Optimization** to estimate the model parameters by fitting theoretical moments to empirical data.
-5. **Stores** the optimized parameters and R-squared values for analysis.
-6. **Plots** the empirical and fitted moments for visualization.
+# Simulation parameters
+N = 300000               # Number of steps
+alpha = 1.7              # Lévy exponent (1 < alpha < 2)
+tmin = 0.01              # Minimum time between steps
+v_mean = 10.0            # Mean velocity
+dt = 1.0                 # Time increment
 
-### Example 2: Simulating and Analyzing Multiple Lévy Flights
+# Simulate Lévy flight
+x_traj, y_traj = levy_flight_2D_Simplified(N, alpha, tmin, v_mean, dt)
 
-An example script is provided in the `examples/` directory as `run_levy_simulation.py`. This script demonstrates how to simulate multiple Lévy flights over multiple iterations and perform parameter estimation.
+# Time intervals for analysis
+tau_list = np.arange(1, 100, 5)
 
-#### Running the Example Script
+# Calculate empirical moments
+dx2 = []
+dx4 = []
+for tau_i in tau_list:
+    dx = x_traj[int(tau_i):] - x_traj[:-int(tau_i)]
+    dy = y_traj[int(tau_i):] - y_traj[:-int(tau_i)]
+    displacement = dx**2 + dy**2
+    dx2.append(np.mean(displacement))
+    dx4.append(np.mean(displacement**2))
 
-```bash
-python examples/run_levy_simulation.py
+dx2_log = np.log(dx2)
+dx4_log = np.log(dx4)
+
+# Parameter estimation using optimization
+def objective_function(params, tau_list, dx2_log, dx4_log, tmin):
+    alpha_opt, v_mean_opt = params
+    model_dx2_log = levy_moments_log(2, alpha_opt, v_mean_opt, tau_list, tmin)
+    model_dx4_log = levy_moments_log(4, alpha_opt, v_mean_opt, tau_list, tmin)
+    error = np.sum((dx2_log - model_dx2_log)**2 + (dx4_log - model_dx4_log)**2)
+    return error
+
+initial_guess = [alpha, v_mean]
+bounds = [(1.1, 2.0), (v_mean * 0.5, v_mean * 1.5)]
+
+result = optimize.minimize(
+    objective_function,
+    initial_guess,
+    args=(tau_list, dx2_log, dx4_log, tmin),
+    bounds=bounds
+)
+
+estimated_alpha, estimated_v_mean = result.x
+print("Estimated Parameters:")
+print(f"alpha = {estimated_alpha:.4f}")
+print(f"v_mean = {estimated_v_mean:.4f}")
+
+# Plot empirical and fitted moments
+fitted_dx2_log = levy_moments_log(2, estimated_alpha, estimated_v_mean, tau_list, tmin)
+fitted_dx4_log = levy_moments_log(4, estimated_alpha, estimated_v_mean, tau_list, tmin)
+
+plt.figure(figsize=(12, 5))
+plt.subplot(1, 2, 1)
+plt.plot(np.log(tau_list), dx2_log, 'o', label='Empirical log M2')
+plt.plot(np.log(tau_list), fitted_dx2_log, '-', label='Fitted log M2')
+plt.xlabel('log(tau)')
+plt.ylabel('log(M2)')
+plt.legend()
+
+plt.subplot(1, 2, 2)
+plt.plot(np.log(tau_list), dx4_log, 'o', label='Empirical log M4')
+plt.plot(np.log(tau_list), fitted_dx4_log, '-', label='Fitted log M4')
+plt.xlabel('log(tau)')
+plt.ylabel('log(M4)')
+plt.legend()
+
+plt.tight_layout()
+plt.show()
 ```
 
-#### Script Overview
+### Applying to Real-Life Data
 
-The script performs the following steps:
-
-1. **Simulates** multiple Lévy flights with random parameters within specified ranges.
-2. **Calculates** the empirical second and fourth moments of the displacements.
-3. **Performs Optimization** to estimate the Lévy exponent `alpha` and mean velocity `v_mean` by fitting theoretical moments to empirical data.
-4. **Stores** the optimized parameters and R-squared values for analysis.
-5. **Plots** the empirical and fitted moments for the first few iterations.
-
-
-## Package Structure
-
-The package is organized into the following modules and subpackages:
-
-```
-IntLevPy/
-├── __init__.py
-├── processes.py          # Simulation of intermittent and Lévy processes
-├── moments.py            # Calculation of statistical moments
-├── optimization.py       # Optimization routines for parameter estimation
-├── classification.py     # Classification methods for process analysis
-├── utils.py              # Utility functions for data processing
-├── examples/
-│   ├── run_simulation.py          # Example script for intermittent processes
-│   └── run_levy_simulation.py     # Example script for Lévy processes
-├── tests/                # Unit tests for the package
-│   ├── __init__.py
-│   ├── test_processes.py
-│   ├── test_moments.py
-│   ├── test_optimization.py
-│   ├── test_classification.py
-│   └── test_utils.py
-├── setup.py              # Installation script
-└── README.md             # Package documentation
-```
-
-### Module Descriptions
-
-- **intermittent_levy.processes**
-  - `intermittent3`: Simulate intermittent processes with specified parameters.
-  - `levy_flight_2D_Simplified`: Simulate 2D Lévy flights.
-
-- **intermittent_levy.moments**
-  - `mom2_serg_log`: Calculate the logarithm of the second moment for intermittent processes.
-  - `mom4_serg_log`: Calculate the logarithm of the fourth moment for intermittent processes.
-  - `levy_moments_log`: Calculate the logarithm of the moments for Lévy flights.
-
-- **intermittent_levy.optimization**
-  - `to_optimize_mom4_and_2_serg_log`: Objective function for optimizing intermittent process parameters based on moments.
-  - `to_optimize_levy`: Objective function for optimizing Lévy flight parameters.
-
-- **intermittent_levy.classification**
-  - `form_groups`: Classify data into groups based on thresholds.
-  - `real_k_and_fisher`: Statistical analysis using Fisher's exact test.
-
-- **intermittent_levy.utils**
-  - `adjusted_r_square`: Calculate the adjusted R-squared value.
-  - `r_square`: Calculate the R-squared value.
-  - `adjusted_r_square_array`: Calculate adjusted R-squared for multiple fits.
-
-- **intermittent_levy.examples**
-  - `run_simulation.py`: Example script demonstrating how to simulate and analyze intermittent processes.
-  - `run_levy_simulation.py`: Example script demonstrating how to simulate and analyze Lévy processes.
-
-- **intermittent_levy.tests**
-  - Unit tests for each module to ensure code reliability and correctness.
-
-## Contributing
-
-Contributions are welcome! Please follow these steps:
-
-1. **Fork the Repository:** Create your own fork of the project.
-2. **Create a Branch:** Create a new branch for your feature or bug fix.
-3. **Commit Changes:** Make your changes and commit them with descriptive messages.
-4. **Push to Branch:** Push your changes to your forked repository.
-5. **Submit a Pull Request:** Submit a pull request to the `main` branch of the original repository.
-
-Please ensure your code adheres to the project's coding standards and passes all existing tests. Adding new tests for your contributions is highly appreciated.
-
-## License
-
-This project is licensed under the [MIT License](https://github.com/shailendrabhandari/IntLevPy/blob/main/LICENSE).
+**IntLevPy** can also be applied to real-life datasets, such as eye-tracking data or financial time series, for classification and analysis using the provided statistical methods.
 
 ## Contact
 
-- **Shailendra Bhandari**
-  - **Email:** shailendra.bhandari@oslomet.no
-- **Pedro Lencastre**
-  - **Email:** pedroreg@oslomet.no
+For questions or inquiries, please contact:
 
-For any questions or inquiries, please feel free to reach out via email.
+- **Shailendra Bhandari**
+  - Email: shailendra.bhandari@oslomet.no
+- **Pedro Lencastre**
+  - Email: pedroreg@oslomet.no
+
+---
+
+This package is licensed under the [MIT License](https://github.com/shailendrabhandari/IntLevPy/blob/main/LICENSE).
+
+---
+
+**GitHub Repository:** [IntLevPy on GitHub](https://github.com/shailendrabhandari/IntLevPy)
+
+**PyPI Package:** [IntLevPy on PyPI](https://pypi.org/project/IntLevPy/)
+
+**Documentation:** [IntLevPy Documentation](https://intlevpy.readthedocs.io/en/latest/)
