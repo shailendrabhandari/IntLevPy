@@ -2,12 +2,12 @@ from setuptools import setup, find_packages
 
 with open("README.md", "r") as readme_file:
     long_description = readme_file.read()
+
 try:
     with open("authors.rst", "r") as authors_file:
         long_description += "\n\n" + authors_file.read()
 except FileNotFoundError:
-    # Optional: Add a warning or log message here
-    long_description += "\n\nNo AUTHORS information provided."
+    long_description += "\n\nFor a detailed list of contributors, visit: [Contributors Page](https://intlevpy.readthedocs.io/en/latest/authors.html#contributors)."
 
 
 setup(
