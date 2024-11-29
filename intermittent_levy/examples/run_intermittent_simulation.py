@@ -16,10 +16,10 @@ os.makedirs(results_dir, exist_ok=True)
 
 # Initialize parameters
 Nr_iterations = 200  # Adjust as needed
-tau_list = np.arange(1, 20)  # Define your tau_list appropriately
+tau_list = np.arange(1, 100)  # Define your tau_list appropriately
 
 # Lists to store results
-int_params = []n
+int_params = []
 list_X_traj = []
 list_Y_traj = []
 r_squared_int = []

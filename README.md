@@ -156,10 +156,7 @@ dt = 1.0                 # Time increment
 # Simulate Lévy flight
 x_traj, y_traj = levy_flight_2D_Simplified(N, alpha, tmin, v_mean, dt)
 
-# Time intervals for analysis
-tau_list = np.arange(1, 100, 5)
-
-# Calculate empirical moments
+# Time intervals for analy from my side for the papernts
 dx2 = []
 dx4 = []
 for tau_i in tau_list:
@@ -230,9 +227,7 @@ For questions or inquiries, please contact:
   - Email: shailendra.bhandari@oslomet.no
 - **Pedro Lencastre**
   - Email: pedroreg@oslomet.no
-
----
-
+ from my side for the paper
 This package is licensed under the [MIT License](https://github.com/shailendrabhandari/IntLevPy/blob/main/LICENSE).
 
 ---

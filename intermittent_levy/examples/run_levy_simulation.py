@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 from intermittent_levy.processes import levy_flight_2D_Simplified
 from intermittent_levy.moments import levy_moments_log
 from intermittent_levy.optimization import to_optimize_levy
-from intermittent_levy.utils import adjusted_r_square, adjusted_r_square_array
+from intermittent_levy.utils import adjusted_r_square
 from intermittent_levy.classification import form_groups
 from scipy import optimize
 import os
@@ -14,7 +14,7 @@ os.makedirs(results_dir, exist_ok=True)
 
 # Initialize parameters
 Nr_iterations = 200
-tau_list = np.arange(1, 20)
+tau_list = np.arange(1, 100)
 
 # Parameter ranges for simulation
 gtmin_list = [0.005, 0.05]
@@ -46,11 +46,11 @@ for itera in range(Nr_iterations):
 
     # Estimate number of redirections
     k = 20 * (galfa - 2)
-    G_redirect = int(90000 * (10 ** (0.05 * k)) / gtmin)
+    G_redirect = int(300000 * (10 ** (0.05 * k)) / gtmin)
 
     # Simulate Lévy flight
     xsynth, ysynth = levy_flight_2D_Simplified(
-        G_redirect, 300000, galfa, gtmin, gv, measuring_dt
+        G_redirect, 900000, galfa, gtmin, gv, measuring_dt
     )
 
     # Store parameters and trajectories

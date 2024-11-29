@@ -99,7 +99,7 @@ def levy_moments_log(n_mom, alpha, v_mean, t_list, tmin):
     return np.log(moments)
 
 
-def levy_moments_log(n_mom, alpha, v_mean, t_list, tmin):
+'''def levy_moments_log(n_mom, alpha, v_mean, t_list, tmin):
     """
     Calculate the theoretical logarithm of the nth moment for Lévy flights.
 
@@ -116,4 +116,43 @@ def levy_moments_log(n_mom, alpha, v_mean, t_list, tmin):
     num = (tmin ** alpha) * (v_mean ** n_mom) * n_mom * (alpha - 2) * t_list ** (2 + n_mom - alpha)
     den = (tmin ** 2) * (2 + n_mom - alpha) * (1 + n_mom - alpha)
     moments = num / den
+    return np.log(moments)'''
+
+def levy_moments_log(n_mom, alpha, v_mean, t_list, tmin):
+    """
+    Calculate the theoretical logarithm of the nth moment for Lévy flights.
+
+    Parameters:
+    n_mom (int): The order of the moment (e.g., 2 or 4).
+    alpha (float): Lévy distribution exponent (1 < alpha < 3).
+    v_mean (float): Mean velocity.
+    t_list (array-like): List of time lags.
+    tmin (float): Minimum flight time.
+
+    Returns:
+    array: Logarithm of the theoretical moments.
+    """
+    # Avoid invalid parameter ranges
+    if alpha <= 1 or alpha >= 3:
+        raise ValueError(f"Invalid alpha value: {alpha}. Must be in the range (1, 3).")
+    if v_mean <= 0:
+        raise ValueError(f"Invalid v_mean value: {v_mean}. Must be greater than 0.")
+    if np.any(t_list <= 0):
+        raise ValueError(f"Invalid t_list values: {t_list}. All time lags must be positive.")
+    if tmin <= 0:
+        raise ValueError(f"Invalid tmin value: {tmin}. Must be greater than 0.")
+
+    # Calculate numerator and denominator
+    try:
+        num = (tmin ** alpha) * (v_mean ** n_mom) * n_mom * (alpha - 2) * t_list ** (2 + n_mom - alpha)
+        den = (tmin ** 2) * (2 + n_mom - alpha) * (1 + n_mom - alpha)
+        moments = num / den
+    except ZeroDivisionError as e:
+        raise ZeroDivisionError(f"Error in moments calculation: {e}")
+
+    # Replace invalid moments with a small positive value
+    moments = np.nan_to_num(moments, nan=1e-10, posinf=1e10, neginf=1e-10)
+    moments = np.maximum(moments, 1e-10)  # Avoid non-positive values
+
+    # Return logarithm of moments
     return np.log(moments)
