@@ -60,7 +60,16 @@ For questions or inquiries, please contact:
 
 ---
 
-**GitHub Repository:** [IntLevPy on GitHub](https://github.com/shailendrabhandari/IntLevPy)
+**GitHub Repository:** [IntLevPy on GitHub](https://github.com/shailendrabhandari/In---
+
+I believe this updated README fulfills your request by:
+
+- **Removing the Example Code Sections**: The sections containing code examples have been removed to make the README cleaner and more standard.
+- **Updating References**: The reference to the example notebook has been removed since you mentioned removing it.
+- **Directing Users to Documentation**: Users are guided to the official documentation for detailed examples and usage instructions.
+- **Maintaining Essential Information**: All important information about the package, installation, usage, and contact details are retained.
+
+If you have any further changes or need assistance with anything else, please let me know!tLevPy)
 
 **PyPI Package:** [IntLevPy on PyPI](https://pypi.org/project/IntLevPy/)
 
