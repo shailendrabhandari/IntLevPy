@@ -1,4 +1,3 @@
-
 [![Documentation Status](https://readthedocs.org/projects/intlevpy/badge/?version=latest)](https://intlevpy.readthedocs.io/en/latest/)
 [![License](https://img.shields.io/badge/License-MIT-brightgreen)](https://github.com/shailendrabhandari/IntLevPy/blob/main/LICENSE)
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/intlevpy)](https://pypi.org/project/IntLevPy/)
@@ -7,11 +6,7 @@
 [![GitHub Watchers](https://img.shields.io/github/watchers/shailendrabhandari/IntLevPy?style=social)](https://github.com/shailendrabhandari/IntLevPy/watchers)
 [![GitHub Stars](https://img.shields.io/github/stars/shailendrabhandari/IntLevPy?style=social)](https://github.com/shailendrabhandari/IntLevPy/stargazers)
 
-# IntLevPy: Intermittent Lévy Processes Package
-
-**IntLevPy** is a Python package for simulating and analyzing intermittent and Lévy processes. It provides tools for process simulation, moments calculation, optimization, and classification methods, making it ideal for researchers and practitioners in fields like statistical physics and complex systems.
-
-## Overview
+---
 
 - **Process Simulation:** Generate synthetic intermittent and Lévy flight trajectories.
 - **Moments Calculation:** Compute theoretical and empirical moments of trajectories.
@@ -32,16 +27,13 @@ pip install IntLevPy
 
 To use **IntLevPy**, import the relevant modules and functions in your Python script or notebook. The package provides functions for simulating processes, computing moments, performing optimizations, and classifying trajectories.
 
-For detailed examples and usage instructions, please refer to the [IntLevPy Documentation](https://intlevpy.readthedocs.io/en/latest/).
 
 ### Applying to Real-Life Data
 
 **IntLevPy** can be applied to real-life datasets, such as eye-tracking data or financial time series, for classification and analysis using the provided statistical methods.
 
----
-For detailed examples and tutorials, please refer to the [IntLevPy Documentation](https://intlevpy.readthedocs.io/en/latest/).
 An example notebook demonstrating the usage of an eye-tracking dataset can be found in the [Example Notebook](https://github.com/shailendrabhandari/IntLevPy/blob/main/intermittent_levy/examples/example.ipynb).
----
+
 
 ## Model
 
@@ -60,11 +52,7 @@ For questions or inquiries, please contact:
 
 ---
 
-**GitHub Repository:** [IntLevPy on GitHub](https://github.com/shailendrabhandari/In---
-
-I believe this updated README fulfills your request by:
-
-- **Removing the Example Code Sections**: The sections containing code examples have been removed to make the README cleaner and more standard.
+---ME cleaner and more standard.
 - **Updating References**: The reference to the example notebook has been removed since you mentioned removing it.
 - **Directing Users to Documentation**: Users are guided to the official documentation for detailed examples and usage instructions.
 - **Maintaining Essential Information**: All important information about the package, installation, usage, and contact details are retained.
@@ -80,3 +68,5 @@ If you have any further changes or need assistance with anything else, please le
 ---
 
 **Contributors:** For a detailed list of contributors, visit the [Contributors Page](https://intlevpy.readthedocs.io/en/latest/authors.html#contributors).
+
+--- 
