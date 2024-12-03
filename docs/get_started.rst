@@ -52,11 +52,3 @@ For Lévy flight simulations, run:
    python examples/run_levy_simulation.py
 
 This example demonstrates how to generate and analyze multiple Lévy trajectories.
-
-Next Steps
-----------
-
-To learn more about specific modules, refer to:
-- :ref:`features` for a breakdown of the package features.
-- :ref:`api/modules` for the full API documentation.
-

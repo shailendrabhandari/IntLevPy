@@ -8,7 +8,7 @@ This package, **InterLevPy**, is being developed and maintained by `Shailendra B
 Lead Development Team
 ---------------------
 
-The following individuals form the core development team:
+The following members form the core development team:
 
 - **Shailendra Bhandari** (`shailendra.bhandari@oslomet.no <mailto:shailendra.bhandari@oslomet.no>`_)
 - **Pedro Lencastre** (`pedroreg@oslomet.no <mailto:pedroreg@oslomet.no>`_)
@@ -25,5 +25,5 @@ Contributors
 Citing IntLevy-Processes
 ------------------------
 
-If you would like to cite **IntLevPy** in your work, please refer to the citation guidelines, which will be announced soon.
+..will be announced soon.
 

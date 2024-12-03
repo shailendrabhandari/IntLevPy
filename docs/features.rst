@@ -3,9 +3,9 @@
 Features
 ========
 
-The IntLevPy package offers a variety of features for simulating, analyzing, and classifying complex stochastic processes. Key features include:
+The IntLevPy package offers the following features for simulating, analyzing, and classifying complex stochastic processes:
 
-Process Simulation
+Simulation
 ------------------
 
 - Generate synthetic intermittent and Lévy trajectories.
@@ -14,7 +14,7 @@ Process Simulation
 **Functions:**
 
 1. ``intermittent3``  
-   **Description:** Simulates an intermittent 2D random walk with switching regimes (diffusion and ballistic motion).
+   **Description:** Simulates an intermittent 2D Lévy walk (diffusion and ballistic motion).
 
    **Parameters:**
    - ``nt`` (int): Number of time steps.
@@ -103,23 +103,23 @@ Optimization for Model Fitting
    - ``logdx4`` (array-like): Empirical 4th moment data (log scale).
 
    **Returns:**  
-   Mean squared error between empirical and theoretical log 4th moments.
+   Mean squared error between empirical and theoretical fourth moments.
 
 2. ``to_optimize_mom2_serg_log``  
-   **Description:** Objective function to optimize parameters for the 2nd moment in intermittent search processes.
+   Description: Objective function to optimize parameters for the second moment in intermittent search processes.
 
    **Parameters:**
    - ``variables`` (list): ``[v0, D, lambdaB, lambdaD]`` values for velocity, diffusion, and transition rates.
    - ``tau_list`` (array-like): List of time lags.
-   - ``logdx2`` (array-like): Empirical 2nd moment data (log scale).
+   - ``logdx2`` (array-like): Empirical second moment data (log scale).
 
    **Returns:**  
-   Mean squared error between empirical and theoretical log 2nd moments.
+   Mean squared error between empirical and theoretical second moment.
 
 Classification
 --------------
 
-- Classify processes as intermittent or Lévy based on statistical properties.
+- Classify processes as intermittent or Levy based on statistical properties.
 - Uses threshold-based and Fisher’s exact test-based classifications.
 
 **Functions:**
@@ -128,7 +128,7 @@ Classification
    **Description:** Calculates frequency matrix and detection metrics for a binary sequence, with Fisher’s exact test for correlation.
 
    **Parameters:**
-   - ``binary_vector`` (array-like): Sequence of binary values (0s and 1s).
+   - ``binary_vector`` (array-like): Sequence of binary values.
 
    **Returns:**  
    Tuple containing the frequency matrix, detection values, and log of Fisher exact test values.

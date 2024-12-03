@@ -3,7 +3,7 @@
 Installation
 ============
 
-To install **IntLevPy**, clone the repository and install the package using pip:
+To install **IntLevPy**, clone the the repository and install the package using pip:
 
 .. code-block:: bash
 
@@ -20,5 +20,5 @@ Ensure all required dependencies are installed:
 
     pip install -r requirements.txt
 
-Once installed, you're ready to start using the package! For usage examples, refer to the :ref:`usage` section.
+Once installed, you are ready to start using the package! For usage examples, refer to the :ref:`usage` section.
 

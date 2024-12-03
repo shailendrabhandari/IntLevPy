@@ -4,7 +4,7 @@
 Welcome to IntLevPy Documentation
 ==========================================
 
-This documentation provides an overview of the IntLevPy package, which includes tools for simulating and analyzing intermittent and Lévy processes.
+This documentation provides an an overview of the IntLevPy package, which includes tools for simulating and analyzing intermittent and Lévy processes.
 
 Contents:
 ---------
@@ -21,7 +21,7 @@ Contents:
    faq
    authors
    
-Project Overview
+Project ooverview
 ================
 
 The **IntLevPy** package provides a Python toolkit for:
@@ -30,7 +30,7 @@ The **IntLevPy** package provides a Python toolkit for:
 - Fitting model parameters to empirical data.
 - Classifying process types using statistical methods.
 
-This package is suitable for researchers in statistical physics, complex systems, and related fields.
+This package can be suitable for researchers in statistical physics, complex systems, and related fields..
 
 Indices and Tables
 ==================
