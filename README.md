@@ -39,7 +39,7 @@ An example notebook demonstrating the usage of an eye-tracking dataset can be fo
 
 ![Intermittent Lévy Process Model](https://raw.githubusercontent.com/shailendrabhandari/IntLevPy/main/intermittent_levy/examples/results/model.jpg)
 
-*Figure: Schematic representation of the intermittent Lévy process model.*
+*Figure: Schematic representation of how the IntLevPy package.*
 
 ## Contact
 
