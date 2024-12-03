@@ -8,7 +8,7 @@
 
 ---
 
-- **Process Simulation:** Generate synthetic intermittent and Lévy flight trajectories.
+- **Simulation:** Generate synthetic intermittent and Lévy flight trajectories.
 - **Moments Calculation:** Compute theoretical and empirical moments of trajectories.
 - **Optimization:** Fit model parameters to empirical data using optimization techniques.
 - **Classification:** Differentiate between intermittent and Lévy processes using statistical methods.
@@ -43,7 +43,7 @@ An example notebook demonstrating the usage of an eye-tracking dataset can be fo
 
 ## Contact
 
-For questions or inquiries, please contact:
+For questions or inquiries:
 
 - **Shailendra Bhandari**
   - Email: shailendra.bhandari@oslomet.no
@@ -51,13 +51,6 @@ For questions or inquiries, please contact:
   - Email: pedroreg@oslomet.no
 
 ---
-
----ME cleaner and more standard.
-- **Updating References**: The reference to the example notebook has been removed since you mentioned removing it.
-- **Directing Users to Documentation**: Users are guided to the official documentation for detailed examples and usage instructions.
-- **Maintaining Essential Information**: All important information about the package, installation, usage, and contact details are retained.
-
-If you have any further changes or need assistance with anything else, please let me know!tLevPy)
 
 **PyPI Package:** [IntLevPy on PyPI](https://pypi.org/project/IntLevPy/)
 
