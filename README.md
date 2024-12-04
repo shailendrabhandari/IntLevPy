@@ -28,7 +28,7 @@ pip install IntLevPy
 To use **IntLevPy**, import the relevant modules and functions in your Python script or notebook. The package provides functions for simulating processes, computing moments, performing optimizations, and classifying trajectories.
 
 
-### Applying to Real-Life Data
+### Applying to emperical Data
 
 **IntLevPy** can be applied to real-life datasets, such as eye-tracking data or financial time series, for classification and analysis using the provided statistical methods.
 

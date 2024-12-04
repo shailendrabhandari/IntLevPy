@@ -12,7 +12,6 @@ import os
 results_dir = 'results/levy'
 os.makedirs(results_dir, exist_ok=True)
 
-# Initialize parameters
 Nr_iterations = 200
 tau_list = np.arange(1, 100)
 
@@ -48,7 +47,7 @@ for itera in range(Nr_iterations):
     k = 20 * (galfa - 2)
     G_redirect = int(300000 * (10 ** (0.05 * k)) / gtmin)
 
-    # Simulate Lévy flight
+    # Simulate Lévy walk
     xsynth, ysynth = levy_flight_2D_Simplified(
         G_redirect, 900000, galfa, gtmin, gv, measuring_dt
     )
