@@ -14,7 +14,7 @@ The following members form the core development team:
 - **Pedro Lencastre** (`pedroreg@oslomet.no <mailto:pedroreg@oslomet.no>`_)
 - **Sergiy Denysov** (`sergiyde@oslomet.no <mailto:sergiyde@oslomet.no>`_)
 - **Anis Yazidi** (`anisy@oslomet.no <mailto:anisy@oslomet.no>`_)
-- **Yuri Bystrik**
+- **Yuri Bystrik** (`yurabystrik@gmail.com <yurabystrik@gmail.com>`_)
 - **Pedro G. Lind** (`pedrolin@oslomet.no <mailto:pedrolin@oslomet.no>`_)
 
 Contributors
