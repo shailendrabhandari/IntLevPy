@@ -6,6 +6,12 @@
 [![GitHub Watchers](https://img.shields.io/github/watchers/shailendrabhandari/IntLevPy?style=social)](https://github.com/shailendrabhandari/IntLevPy/watchers)
 [![GitHub Stars](https://img.shields.io/github/stars/shailendrabhandari/IntLevPy?style=social)](https://github.com/shailendrabhandari/IntLevPy/stargazers)
 
+
+# IntLevPy: Intermittent Lévy Processes Package
+
+IntLevPy is a Python package for simulating and analyzing intermittent and Lévy processes. It provides tools for process simulation, moments calculation, optimization, and classification methods, making it ideal for researchers and practitioners in fields like statistical physics and complex systems.
+
+Overview
 ---
 
 - **Simulation:** Generate synthetic intermittent and Lévy flight trajectories.
