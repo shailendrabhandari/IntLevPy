@@ -51,7 +51,7 @@ An example notebook demonstrating the usage of an eye-tracking dataset can be fo
 
 For questions or inquiries:
 
-- **Shailendra Bhandari**
+ **Shailendra Bhandari**
   - Email: shailendra.bhandari@oslomet.no
 
 
