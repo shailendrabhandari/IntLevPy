@@ -32,7 +32,7 @@ To use **IntLevPy**, import the relevant modules and functions in your Python sc
 
 **IntLevPy** can be applied to real-life datasets, such as eye-tracking data or financial time series, for classification and analysis using the provided statistical methods.
 
-An example notebook demonstrating the usage of an eye-tracking dataset can be found in the [Example Notebook](https://github.com/shailendrabhandari/IntLevPy/blob/main/intermittent_levy/examples/example.ipynb).
+An example notebook demonstrating the usage of an eye-tracking dataset can be found in the [Example Notebook](https://github.com/shailendrabhandari/IntLevPy/blob/main/intermittent_levy/examples/example_notebook.ipynb).
 
 
 ## Model
@@ -47,8 +47,7 @@ For questions or inquiries:
 
 - **Shailendra Bhandari**
   - Email: shailendra.bhandari@oslomet.no
-- **Pedro Lencastre**
-  - Email: pedroreg@oslomet.no
+
 
 ---
 
