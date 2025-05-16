@@ -1,7 +1,7 @@
-Metadata-Version: 2.1
+Metadata-Version: 2.4
 Name: IntLevPy
-Version: 0.0.5
-Summary: A Python toolkit for simulating intermittent processes and Levy flights.
+Version: 0.0.6
+Summary: A Python toolkit for simulating intermittent search and Levy walk.
 Home-page: https://github.com/shailendrabhandari/IntLevy-Processes
 Author: Shailendra Bhandari
 Author-email: shailendra.bhandari@oslomet.no
@@ -11,6 +11,15 @@ Classifier: Operating System :: OS Independent
 Requires-Python: >=3.6
 Description-Content-Type: text/markdown
 License-File: LICENSE
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: license-file
+Dynamic: requires-python
+Dynamic: summary
 
 [![Documentation Status](https://readthedocs.org/projects/intlevpy/badge/?version=latest)](https://intlevpy.readthedocs.io/en/latest/)
 [![License](https://img.shields.io/badge/License-MIT-brightgreen)](https://github.com/shailendrabhandari/IntLevPy/blob/main/LICENSE)
@@ -20,6 +29,12 @@ License-File: LICENSE
 [![GitHub Watchers](https://img.shields.io/github/watchers/shailendrabhandari/IntLevPy?style=social)](https://github.com/shailendrabhandari/IntLevPy/watchers)
 [![GitHub Stars](https://img.shields.io/github/stars/shailendrabhandari/IntLevPy?style=social)](https://github.com/shailendrabhandari/IntLevPy/stargazers)
 
+
+# IntLevPy: Intermittent Lévy Processes Package
+
+IntLevPy is a Python package for simulating and analyzing intermittent and Lévy processes. It provides tools for process simulation, moments calculation, optimization, and classification methods, making it ideal for researchers and practitioners in fields like statistical physics and complex systems.
+
+Overview
 ---
 
 - **Simulation:** Generate synthetic intermittent and Lévy flight trajectories.
@@ -42,27 +57,26 @@ pip install IntLevPy
 To use **IntLevPy**, import the relevant modules and functions in your Python script or notebook. The package provides functions for simulating processes, computing moments, performing optimizations, and classifying trajectories.
 
 
-### Applying to Real-Life Data
+### Applying to emperical Data
 
 **IntLevPy** can be applied to real-life datasets, such as eye-tracking data or financial time series, for classification and analysis using the provided statistical methods.
 
-An example notebook demonstrating the usage of an eye-tracking dataset can be found in the [Example Notebook](https://github.com/shailendrabhandari/IntLevPy/blob/main/intermittent_levy/examples/example.ipynb).
+An example notebook demonstrating the usage of an eye-tracking dataset can be found in the [Example Notebook](https://github.com/shailendrabhandari/IntLevPy/blob/main/intermittent_levy/examples/example_notebook.ipynb).
 
 
 ## Model
 
 ![Intermittent Lévy Process Model](https://raw.githubusercontent.com/shailendrabhandari/IntLevPy/main/intermittent_levy/examples/results/model.jpg)
 
-*Figure: Schematic representation of the intermittent Lévy process model.*
+*Figure: Schematic representation of how the IntLevPy package.*
 
 ## Contact
 
 For questions or inquiries:
 
-- **Shailendra Bhandari**
+ **Shailendra Bhandari**
   - Email: shailendra.bhandari@oslomet.no
-- **Pedro Lencastre**
-  - Email: pedroreg@oslomet.no
+
 
 ---
 

@@ -12,7 +12,7 @@ except FileNotFoundError:
 
 setup(
     name="IntLevPy",
-    version="0.0.5",
+    version="0.0.6",
     author="Shailendra Bhandari",
     author_email="shailendra.bhandari@oslomet.no",
     description="A Python toolkit for simulating intermittent search and Levy walk.",
